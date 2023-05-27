@@ -8,7 +8,11 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/search',
     component: SearchPage,
-  }
+  },
+  {
+    path: '/QR-dealer',
+    component: ()=>import('@/views/qr-dealer/index.vue'),
+  },
 ]
 
 // ()=>import('@/views/search-page/index.vue')
