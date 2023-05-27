@@ -5,7 +5,12 @@ export default {
     "./src/**/*.{vue,js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      backdropBlur: {
+        xxs: '1px',
+        xs: '2px',
+      }
+    },
   },
   plugins: [],
 }

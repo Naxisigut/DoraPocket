@@ -7,12 +7,17 @@
     </button>
   </div>
 
-  <dialog v-modal-close class="p-0" ref="searchPop" id="dialog" @click="clickPop">
-    <div>
-      <input type="text">
-      <div v-if="!searchRes.length">暂无搜索结果</div>
+  <dialog v-modal-close class="p-0 backdrop:backdrop-blur-xxs bg-transparent" ref="searchPop" id="dialog">
+    <div class="w-[80vw] max-w-lg h-[70vh] rounded-lg bg-white">
+      <div class="flex items-center leading-8 text-slate-400 p-4 border-b-2">
+        <SearchIcon></SearchIcon>
+        <input type="text" class=" flex-1 outline-none" placeholder="请输入...">
+      </div>
+      <div v-if="!searchRes.length" class="p-4 leading-8 text-center">暂无搜索结果</div>
       <ul v-else>
-        <li v-for="(item, index) in searchRes" :key="index">{{item}}</li>
+        <li v-for="(item, index) in searchRes" :key="index" class="p-4 leading-8">
+          {{item}}
+        </li>
       </ul>
     </div>
   </dialog>
@@ -28,14 +33,7 @@ const clickSearch = ()=>{
   searchPop.value.showModal()
 }
 
-/* 点击modal时关闭弹窗 */
-// const clickPop = (e:PointerEvent)=>{
-//   if(!e.target)return
-//   const modalClicked = e.target.getAttribute('modal') === '' ? true : false
-//   modalClicked && searchPop.value.close()
-// }
-
-const searchRes = reactive([])
+const searchRes = reactive(['1'])
 
 </script>
 
