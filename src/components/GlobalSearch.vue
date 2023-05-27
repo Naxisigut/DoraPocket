@@ -9,13 +9,13 @@
 
   <dialog v-modal-close class="p-0 backdrop:backdrop-blur-xxs bg-transparent" ref="searchPop" id="dialog">
     <div class="w-[80vw] max-w-lg h-[70vh] rounded-lg bg-white">
-      <div class="flex items-center leading-8 text-slate-400 p-4 border-b-2">
+      <div class="flex items-center leading-8 text-slate-400 p-4 border-b-2  border-slate-300">
         <SearchIcon></SearchIcon>
         <input type="text" v-model="keyWord" class=" flex-1 outline-none" placeholder="请输入...">
       </div>
       <div v-if="!searchRes.length" class="p-4 leading-8 text-center">暂无搜索结果</div>
       <ul v-else>
-        <li v-for="(item, index) in searchRes" @click="jump(item)" :key="index" class="p-4 leading-8">
+        <li v-for="(item, index) in searchRes" @click="jump(item)" :key="index" class=" px-8 py-4 leading-8 border-b-2 border-slate-100 hover:bg-slate-100">
           {{item.name}}
         </li>
       </ul>
