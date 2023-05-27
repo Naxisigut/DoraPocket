@@ -1,7 +1,9 @@
 <template>
   <div class="container p-2 mx-auto" >
     <GlobalSearch></GlobalSearch>
-    <router-view></router-view>
+    <div class="view">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -12,4 +14,7 @@ import GlobalSearch from './components/GlobalSearch.vue';
 </script>
 
 <style scoped>
+.view{
+  min-height: calc(100vh - 56px);
+}
 </style>
