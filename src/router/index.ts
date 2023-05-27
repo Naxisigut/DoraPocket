@@ -1,16 +1,19 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
-import SearchPage from '@/views/search-page/index.vue';
+
+
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    redirect: '/search',
+    // redirect: '/search',
   },
   {
     path: '/search',
-    component: SearchPage,
+    name: 'search-page',
+    component: ()=>import('@/views/search-page/index.vue'),
   },
   {
     path: '/QR-dealer',
+    name: 'QR-dealer',
     component: ()=>import('@/views/qr-dealer/index.vue'),
   },
 ]

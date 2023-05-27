@@ -11,12 +11,12 @@
     <div class="w-[80vw] max-w-lg h-[70vh] rounded-lg bg-white">
       <div class="flex items-center leading-8 text-slate-400 p-4 border-b-2">
         <SearchIcon></SearchIcon>
-        <input type="text" class=" flex-1 outline-none" placeholder="请输入...">
+        <input type="text" v-model="keyWord" class=" flex-1 outline-none" placeholder="请输入...">
       </div>
       <div v-if="!searchRes.length" class="p-4 leading-8 text-center">暂无搜索结果</div>
       <ul v-else>
         <li v-for="(item, index) in searchRes" :key="index" class="p-4 leading-8">
-          {{item}}
+          {{item.name}}
         </li>
       </ul>
     </div>
@@ -25,15 +25,24 @@
 
 <script setup lang="ts">
 import SearchIcon from '@/svgs/search-icon.vue';
-import {ref, reactive} from 'vue';
+import {ref, computed} from 'vue';
+import {useDataBaseStore} from '@/stores/database';
+const store = useDataBaseStore()
 
+/* 模板引用：搜索弹窗 */
 const searchPop = ref()
 
+/* 点击搜索栏 */
 const clickSearch = ()=>{
   searchPop.value.showModal()
 }
 
-const searchRes = reactive(['1'])
+/* 搜索功能 */
+const keyWord = ref('')
+const searchRes = computed(()=>{
+  if(!keyWord.value)return []
+  return store.search(keyWord.value)
+})
 
 </script>
 

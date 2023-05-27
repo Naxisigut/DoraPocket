@@ -1,5 +1,5 @@
 <template>
-  <GlobalSearch></GlobalSearch>
+  <!-- <GlobalSearch></GlobalSearch> -->
 </template>
 
 <script setup lang="ts">
