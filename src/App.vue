@@ -1,11 +1,11 @@
 <template>
   <div class="container p-2 mx-auto" >
-    <GloabalSearch></GloabalSearch>
+    <router-view></router-view>
   </div>
 </template>
 
 <script setup lang="ts">
-import GloabalSearch from './components/GloabalSearch.vue';
+// import GloabalSearch from './components/GloabalSearch.vue';
 
 
 </script>
