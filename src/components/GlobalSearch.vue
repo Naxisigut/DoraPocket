@@ -15,7 +15,7 @@
       </div>
       <div v-if="!searchRes.length" class="p-4 leading-8 text-center">暂无搜索结果</div>
       <ul v-else>
-        <li v-for="(item, index) in searchRes" :key="index" class="p-4 leading-8">
+        <li v-for="(item, index) in searchRes" @click="jump(item)" :key="index" class="p-4 leading-8">
           {{item.name}}
         </li>
       </ul>
@@ -28,6 +28,8 @@ import SearchIcon from '@/svgs/search-icon.vue';
 import {ref, computed} from 'vue';
 import {useDataBaseStore} from '@/stores/database';
 const store = useDataBaseStore()
+import {useRouter} from 'vue-router';
+const router = useRouter()
 
 /* 模板引用：搜索弹窗 */
 const searchPop = ref()
@@ -43,6 +45,10 @@ const searchRes = computed(()=>{
   if(!keyWord.value)return []
   return store.search(keyWord.value)
 })
+const jump = (item: searchDataItem)=>{
+  router.push(item.routeName)
+  searchPop.value.close()
+}
 
 </script>
 

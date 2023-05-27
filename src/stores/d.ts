@@ -1,0 +1,1 @@
+type searchDataItem = Record<'name' | 'path' | 'routeName', string>

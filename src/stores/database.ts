@@ -1,5 +1,5 @@
 // import {ref, computed, reactive} from 'vue';
-const allData = [
+const allData: searchDataItem[] = [
   {name: '二维码', path: '/QR-dealer', routeName: 'QR-dealer'}
 ]
 
