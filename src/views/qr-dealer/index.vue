@@ -43,7 +43,7 @@
 import { reactive, computed } from "vue";
 import QR from 'qrcode-base64'
 const params = reactive({
-  text: 'test',
+  text: '',
   typeNumber: 4,
   errorCorrectLevel: 'M',
   size: 256
