@@ -7,11 +7,6 @@ const routes: RouteRecordRaw[] = [
     // redirect: '/search',
   },
   {
-    path: '/search',
-    name: 'search-page',
-    component: ()=>import('@/views/search-page/index.vue'),
-  },
-  {
     path: '/QR-dealer',
     name: 'QR-dealer',
     component: ()=>import('@/views/qr-dealer/index.vue'),
