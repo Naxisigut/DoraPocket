@@ -63,6 +63,9 @@ dialog::backdrop{
   backdrop-filter: blur(1px);
   animation: slowIn .5s ease;
 }
+ul>li{
+  animation: slowIn .5s ease;
+}
 @keyframes slideDown {
   from {
     transform: translateY(100vh);
@@ -71,7 +74,6 @@ dialog::backdrop{
     transform: translateY(0);
   }
 }
-
 @keyframes slowIn {
     from {
       opacity: 0;
