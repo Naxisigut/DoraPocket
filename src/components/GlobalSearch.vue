@@ -8,8 +8,8 @@
       </button>
     </div>
     <!-- backdrop:backdrop-blur-xxs -->
-    <dialog v-modal-close class="p-0  bg-transparent" ref="searchPop" id="dialog">
-      <div class="w-[80vw] max-w-lg h-[70vh] rounded-lg bg-white">
+    <dialog v-modal-close class="p-0 rounded-lg" ref="searchPop" id="dialog">
+      <div class="w-[80vw] max-w-lg h-[70vh]">
         <div class="flex items-center leading-8 text-slate-400 p-4 border-b-2  border-slate-300">
           <SearchIcon></SearchIcon>
           <input type="text" v-model="keyWord" class=" flex-1 outline-none" placeholder="请输入...">
@@ -56,28 +56,7 @@ const jump = (item: searchDataItem)=>{
 </script>
 
 <style scoped>
-dialog{
-  opacity: 0;
-  /* visibility: hidden; */
-  transition: all 2s ;
-}
 dialog::backdrop{
-  transition: all 2s ;
-  backdrop-filter: blur(0);
-}
-dialog[open]{
-  opacity: 1;
-  visibility: visible;
-}
-dialog[open]::backdrop{
   backdrop-filter: blur(1px);
 }
-
-/* dialog:hover{
-  opacity: 1;
-  backdrop-filter: blur(0);
-}
-dialog:hover::backdrop{
-  backdrop-filter: blur(1px);
-} */
 </style>
