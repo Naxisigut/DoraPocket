@@ -8,9 +8,9 @@
       </button>
     </div>
     <!-- backdrop:backdrop-blur-xxs -->
-    <dialog v-modal-close class="p-0 rounded-lg" ref="searchPop" id="dialog">
+    <dialog v-modal-close class="p-0 rounded-lg " ref="searchPop" id="dialog">
       <div class="w-[80vw] max-w-lg h-[70vh]">
-        <div class="flex items-center leading-8 text-slate-400 p-4 border-b-2  border-slate-300">
+        <div class="flex items-center leading-8 text-slate-400 p-4 border-b-2 border-slate-300">
           <SearchIcon></SearchIcon>
           <input type="text" v-model="keyWord" class=" flex-1 outline-none" placeholder="请输入...">
         </div>
@@ -56,7 +56,54 @@ const jump = (item: searchDataItem)=>{
 </script>
 
 <style scoped>
+dialog{
+  animation: slideDown .5s ease;
+}
 dialog::backdrop{
   backdrop-filter: blur(1px);
+  animation: slowIn .5s ease;
 }
+@keyframes slideDown {
+  from {
+    transform: translateY(100vh);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slowIn {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
 </style>
+
+<!-- <style scoped>
+dialog{
+  transition: all .5s ease-in-out;
+}
+dialog:not(open){
+  /* 自定义隐藏默认样式 */
+  display: block;
+  visibility: hidden;
+  inset: 0;
+
+  /* 上方进入 */
+  transform: translateY(-100vh);
+}
+dialog[open]{
+  /* 自定义显示默认样式 */
+  visibility: visible;
+
+  /* 上方进入 */
+  transform: translateY(0);
+}
+dialog[open]::backdrop{
+  backdrop-filter: blur(1px);
+}
+</style> -->
