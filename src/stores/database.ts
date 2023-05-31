@@ -1,6 +1,7 @@
 // import {ref, computed, reactive} from 'vue';
 const allData: searchDataItem[] = [
-  {name: '二维码', path: '/QR-dealer', routeName: 'QR-dealer'}
+  {name: '二维码', path: '/QR-dealer', routeName: 'QR-dealer'},
+  {name: 'Github', path: '/github-shortcuts', routeName: 'github-shortcuts'},
 ]
 
 /* 选项式store */

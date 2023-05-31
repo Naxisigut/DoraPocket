@@ -11,6 +11,11 @@ const routes: RouteRecordRaw[] = [
     name: 'QR-dealer',
     component: ()=>import('@/views/qr-dealer/index.vue'),
   },
+  {
+    path: '/github-shortcuts',
+    name: 'github-shortcuts',
+    component: ()=>import('@/views/github-shortcuts/index.vue'),
+  },
 ]
 
 // ()=>import('@/views/search-page/index.vue')
