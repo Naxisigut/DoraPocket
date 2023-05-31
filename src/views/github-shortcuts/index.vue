@@ -1,7 +1,12 @@
 <template>
-  <div>
-    git
-  </div>
+  <ul class="grid grid-cols-4">
+    <li v-for="(item, index) in repos" :key="index" class=" w-full p-4">
+      <a :href="item.html_url" class=" block w-full h-full">
+        <h5>{{ item.name }}</h5>
+        <p>{{ item.description }}</p>
+      </a>
+    </li>
+  </ul>
 </template>
 
 <script setup lang="ts">
@@ -19,7 +24,6 @@ function fetchGithub(url: string){
     }).then((res) => {
       resolve(res)
     }).catch((err) => {
-      console.log(3);
       reject(err)
     })
     
@@ -31,21 +35,10 @@ fetchGithub('https://api.github.com/users/Naxisigut').then((res) => {
   return fetchGithub(profile.repos_url)
 }).then((res) => {
   repos = reactive(res)
-  console.log(repos);
 }).catch((err) => {
-  console.log(2, err.message);
+  console.log('err', err.message);
 })
 
-// fetch('https://api.github.com/users/Naxisigut').then((response) => {
-//   if(response.status !== 200){
-//     throw new Error(response.status.toString())
-//   }
-//   return response.json()
-// }).then((res) => {
-//   profile = reactive(res)
-// }).catch((err) => {
-//   console.log(4, {err}); // err.message
-// })
 
 
 
