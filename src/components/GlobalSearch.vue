@@ -84,28 +84,3 @@ ul>li{
     }
   }
 </style>
-
-<!-- <style scoped>
-dialog{
-  transition: all .5s ease-in-out;
-}
-dialog:not(open){
-  /* 自定义隐藏默认样式 */
-  display: block;
-  visibility: hidden;
-  inset: 0;
-
-  /* 上方进入 */
-  transform: translateY(-100vh);
-}
-dialog[open]{
-  /* 自定义显示默认样式 */
-  visibility: visible;
-
-  /* 上方进入 */
-  transform: translateY(0);
-}
-dialog[open]::backdrop{
-  backdrop-filter: blur(1px);
-}
-</style> -->
