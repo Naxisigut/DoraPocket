@@ -1,5 +1,5 @@
 <template>
-  <div>
+
     <div class="flex justify-center">
       <button class="flex items-center px-3 w-1/2 max-w-xs h-10 text-stone-400 rounded-full min-w-max ring-1 ring-slate-200 hover:ring-slate-300" @click="clickSearch">
         <SearchIcon></SearchIcon>
@@ -7,8 +7,8 @@
         <p class="hidden sm:block">Ctrl+K</p>
       </button>
     </div>
-    <!-- backdrop:backdrop-blur-xxs -->
-    <dialog v-modal-close class="p-0 rounded-lg " ref="searchPop" id="dialog">
+
+    <dialog v-modal-close v-k-open class="p-0 rounded-lg " ref="searchPop" id="dialog">
       <div class="w-[80vw] max-w-lg h-[70vh]">
         <div class="flex items-center leading-8 text-slate-400 p-4 border-b-2 border-slate-300">
           <SearchIcon></SearchIcon>
@@ -23,7 +23,6 @@
       </div>
     </dialog>
 
-  </div>
 </template>
 
 <script setup lang="ts">
