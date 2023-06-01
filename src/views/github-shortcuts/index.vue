@@ -3,14 +3,11 @@
   <div>
     {{ profile.login }}
   </div> -->
-  <!-- \grid-cols-[repeat(auto-fill, 300px)]  -->
-  <!-- sm:w-[144px] md:w-[176px] lg:w-[240px] xl:w-[304px] -->
-  <!-- sm:grid-cols-[repeat(auto-fill,144px)] md:grid-cols-[repeat(auto-fill,176px)]  -->
-  <ul class="grid grid-cols-4 gap-4 justify-items-center w-full mx-auto">
-    <li v-for="(item, index) in repos" :key="index" class="  p-4 shadow-md w-full">
-      <a :href="item.html_url" class=" block w-full h-full ">
-        <h5>{{ item.name }}</h5>
-        <p>{{ item.description }}</p>
+  <ul class="grid grid-cols-3 gap-4 justify-items-center w-full mx-auto">
+    <li v-for="(item, index) in repos" :key="index" class=" p-4 shadow-md w-full ">
+      <a :href="item.html_url" class=" block w-full h-full  ">
+        <h5 class="truncate font-medium text-lg">{{ item.name }}</h5>
+        <p class=" font-light text-base">{{ item.description }}</p>
       </a>
     </li>
   </ul>
