@@ -9,13 +9,13 @@
     </div>
 
     <dialog v-modal-close v-k-open class="p-0 rounded-lg " ref="searchPop" id="dialog">
-      <div class="w-[80vw] max-w-lg h-[70vh]">
+      <div class="flex flex-col w-[80vw] max-w-lg h-[70vh]">
         <div class="flex items-center leading-8 text-slate-400 p-4 border-b-2 border-slate-300">
           <SearchIcon></SearchIcon>
-          <input type="text" v-model="keyWord" class=" flex-1 outline-none" placeholder="请输入...">
+          <input v-key-select type="text" v-model="keyWord" class=" flex-1 outline-none" placeholder="请输入...">
         </div>
         <div v-if="!searchRes.length" class="p-4 leading-8 text-center">暂无搜索结果</div>
-        <ul v-else>
+        <ul v-else class="flex-1 h-0 overflow-auto scrollbar" >
           <li v-for="(item, index) in searchRes" @click="jump(item)" :key="index" class=" px-8 py-4 leading-8 border-b-2 border-slate-100 hover:bg-slate-100">
             {{item.name}}
           </li>
@@ -74,12 +74,31 @@ ul>li{
   }
 }
 @keyframes slowIn {
-    from {
-      opacity: 0;
-    }
-
-    to {
-      opacity: 1;
-    }
+  from {
+    opacity: 0;
   }
+  to {
+    opacity: 1;
+  }
+}
+
+.scrollbar::-webkit-scrollbar {
+    width: 10px;
+    height: 20px;
+  }
+
+.scrollbar::-webkit-scrollbar-track {
+    border-radius: 100vh;
+    background: #f1f5f9;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+    background: #cad4e1;  
+    border-radius: 100vh;
+    border: 2px solid #f1f5f9;
+}
+
+.scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #c0a0b9;
+}
 </style>

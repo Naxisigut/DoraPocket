@@ -6,15 +6,12 @@
     <h3 class=" text-lg">
       <a class=" px-4 hover:bg-neutral-100" title="访问Github主页" :href="profile.html_url" target="_blank">{{ profile.name }}</a>
     </h3>
-    <p class="">
-      <span>{{ profile.bio }} </span>
-    </p>
+    <p class="">{{ profile.bio }}</p>
     <p class="">{{ profile.location }}</p>
-
   </div>
 
 
-  <ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center w-full mx-auto">
+  <ul class=" p-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center w-full mx-auto">
     <li v-for="(item, index) in repos" :key="index" class=" p-4 shadow-md w-full rounded-md bg-neutral-100 hover:scale-110 transition-transform">
       <a :href="item.html_url" target="_blank" class=" block w-full h-full  ">
         <h5 class="truncate font-medium text-lg">{{ item.name }}</h5>
