@@ -8,14 +8,14 @@
       </button>
     </div>
 
-    <dialog v-modal-close v-k-open class="p-0 rounded-lg " ref="searchPop" id="dialog">
+    <dialog v-modal-close v-k-open v-key-select class="p-0 rounded-lg " ref="searchPop" id="dialog">
       <div class="flex flex-col w-[80vw] max-w-lg h-[70vh]">
         <div class="flex items-center leading-8 text-slate-400 p-4 border-b-2 border-slate-300">
           <SearchIcon></SearchIcon>
-          <input v-key-select type="text" v-model="keyWord" class=" flex-1 outline-none" placeholder="请输入...">
+          <input type="text" v-model="keyWord" class=" flex-1 outline-none" placeholder="请输入...">
         </div>
         <div v-if="!searchRes.length" class="p-4 leading-8 text-center">暂无搜索结果</div>
-        <ul v-else class="flex-1 h-0 overflow-auto scrollbar" >
+        <ul id="searchResults" v-else class="flex-1 h-0 overflow-auto scrollbar" >
           <li v-for="(item, index) in searchRes" @click="jump(item)" :key="index" class=" px-8 py-4 leading-8 border-b-2 border-slate-100 hover:bg-slate-100">
             {{item.name}}
           </li>
@@ -35,6 +35,8 @@ const router = useRouter()
 
 /* 模板引用：搜索弹窗 */
 const searchPop = ref()
+/* 模板引用：搜索结果列表 */
+const searchList = ref()
 
 /* 点击搜索栏 */
 const clickSearch = ()=>{
@@ -64,6 +66,9 @@ dialog::backdrop{
 }
 ul>li{
   animation: slowIn .5s ease;
+}
+li[selected]{
+  background: #000;
 }
 @keyframes slideDown {
   from {

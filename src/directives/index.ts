@@ -26,21 +26,21 @@
  */
 
 import {Directive} from 'vue';
-type directiveObj = {
+type DirectiveObj = {
   name: string,
   directive: Directive,
   [propName: string]: any
 }
 
 /* dialog标签 点击modal后关闭dialog */
-const dialogModalClose = {
+const dialogModalClose:DirectiveObj = {
   name: 'modal-close',
   directive:{
     mounted: (el:HTMLDialogElement) => {
-      el.setAttribute('modal', 'true')
+      el.setAttribute('modal', '')
       el.addEventListener('click', (e)=>{
         if(!e.target)return
-        const modalClicked = e.target.getAttribute('modal')
+        const modalClicked = e.target.hasAttribute('modal')
         if(modalClicked)el.close()
       })
     },
@@ -48,7 +48,7 @@ const dialogModalClose = {
 }
 
 /* dialog标签 监听Ctrl+K 控制dialog显隐 */
-const dialogKeyOpen: directiveObj = {
+const dialogKeyOpen: DirectiveObj = {
   name: 'k-open',
   preventDefault: (e: KeyboardEvent) => {
     if(e.code === 'KeyK' && e.ctrlKey){
@@ -62,7 +62,6 @@ const dialogKeyOpen: directiveObj = {
       window.addEventListener('keydown', dialogKeyOpen.preventDefault)
 
       dialogKeyOpen.ctrlKOpen = (e:KeyboardEvent) => {
-        console.log('k open');
         if(e.ctrlKey && e.code === 'KeyK' && el.getAttribute('open') === null){
           el.showModal()
         }
@@ -80,13 +79,45 @@ const dialogKeyOpen: directiveObj = {
 }
 
 /* dialog标签  */
-const keySelect = {
+const keySelect:DirectiveObj = {
   name: 'key-select',
   directive:{
     mounted: (el:HTMLInputElement) => {
-      el.addEventListener('keyup', (e) => {
-        console.log(111);
-        // console.log(e.repeat);
+      
+      el.addEventListener('keydown', (e) => {
+        if(e.code !== 'ArrowUp' && e.code !== 'ArrowDown')return
+        e.preventDefault()
+
+        if(e.code === "ArrowUp" || "ArrowDown"){
+          
+        }
+        const list = el.querySelectorAll('li')
+        if(!list.length)return
+        
+        let selectedIdx = -1
+        for(let i = 0; i<list.length; i++){
+          if(list[i].hasAttribute('selected')){
+            selectedIdx = i
+            break
+          }
+        }
+
+        if(selectedIdx !== -1)list[selectedIdx].removeAttribute('selected')
+        let newSelectedIdx = -1
+        if(e.code === 'ArrowUp'){
+          newSelectedIdx = selectedIdx -1          
+        }else if(e.code === 'ArrowDown'){
+          newSelectedIdx = selectedIdx +1
+        }
+        if(newSelectedIdx < 0)newSelectedIdx = list.length -1
+        if(newSelectedIdx >= list.length)newSelectedIdx = 0
+
+        list[newSelectedIdx].setAttribute('selected', '')
+        list[newSelectedIdx].scrollIntoView({
+          behavior: 'smooth',
+          block: 'end',
+          inline: 'nearest'
+        })
       })
     },
   }
