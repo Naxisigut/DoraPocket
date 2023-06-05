@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@vaadin/combo-box': ^24.0.8
   '@vitejs/plugin-vue': ^4.1.0
   autoprefixer: ^10.4.14
   axios: ^1.4.0
@@ -15,6 +16,7 @@ specifiers:
   vue-tsc: ^1.4.2
 
 dependencies:
+  '@vaadin/combo-box': 24.0.8
   axios: 1.4.0
   pinia: 2.1.3_typescript@5.0.4+vue@3.3.4
   qrcode-base64: 1.0.1
@@ -291,6 +293,16 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.14
     dev: true
 
+  /@lit-labs/ssr-dom-shim/1.1.1:
+    resolution: {integrity: sha512-kXOeFbfCm4fFf2A3WwVEeQj55tMZa8c8/f9AKHMobQMkzNUfUj+antR3fRPaZJawsa1aZiP/Da3ndpZrwEe4rQ==}
+    dev: false
+
+  /@lit/reactive-element/1.6.2:
+    resolution: {integrity: sha512-rDfl+QnCYjuIGf5xI2sVJWdYIi56CTCwWa+nidKYX6oIuBYwUbT/vX4qbUDlHiZKJ/3FRNQ/tWJui44p6/stSA==}
+    dependencies:
+      '@lit-labs/ssr-dom-shim': 1.1.1
+    dev: false
+
   /@nodelib/fs.scandir/2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
     engines: {node: '>= 8'}
@@ -311,6 +323,137 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.15.0
     dev: true
+
+  /@open-wc/dedupe-mixin/1.3.1:
+    resolution: {integrity: sha512-ukowSvzpZQDUH0Y3znJTsY88HkiGk3Khc0WGpIPhap1xlerieYi27QBg6wx/nTurpWfU6XXXsx9ocxDYCdtw0Q==}
+    dev: false
+
+  /@polymer/polymer/3.5.1:
+    resolution: {integrity: sha512-JlAHuy+1qIC6hL1ojEUfIVD58fzTpJAoCxFwV5yr0mYTXV1H8bz5zy0+rC963Cgr9iNXQ4T9ncSjC2fkF9BQfw==}
+    dependencies:
+      '@webcomponents/shadycss': 1.11.2
+    dev: false
+
+  /@types/trusted-types/2.0.3:
+    resolution: {integrity: sha512-NfQ4gyz38SL8sDNrSixxU2Os1a5xcdFxipAFxYEuLUlvU2uDwS4NUpsImcf1//SlWItCVMMLiylsxbmNMToV/g==}
+    dev: false
+
+  /@vaadin/combo-box/24.0.8:
+    resolution: {integrity: sha512-tMh4TojcF0jfp8WcnM96ShsDHQOWT3ZaGbKh1mWJ2hoYtc/jmUa3dKrW5gLjAQJte8bgLwcELzboS20loRTB8Q==}
+    dependencies:
+      '@open-wc/dedupe-mixin': 1.3.1
+      '@polymer/polymer': 3.5.1
+      '@vaadin/component-base': 24.0.8
+      '@vaadin/field-base': 24.0.8
+      '@vaadin/input-container': 24.0.8
+      '@vaadin/item': 24.0.8
+      '@vaadin/lit-renderer': 24.0.8
+      '@vaadin/overlay': 24.0.8
+      '@vaadin/vaadin-lumo-styles': 24.0.8
+      '@vaadin/vaadin-material-styles': 24.0.8
+      '@vaadin/vaadin-themable-mixin': 24.0.8
+    dev: false
+
+  /@vaadin/component-base/24.0.8:
+    resolution: {integrity: sha512-uPNSW1OEMYmGnnKWdnYkCHqIf5p6t1fkf0hQlkzUX0aCQ6CcGCFxrEkvX/G85QBlYJfogWluIDhY3cbJPzUA9w==}
+    dependencies:
+      '@open-wc/dedupe-mixin': 1.3.1
+      '@polymer/polymer': 3.5.1
+      '@vaadin/vaadin-development-mode-detector': 2.0.6
+      '@vaadin/vaadin-usage-statistics': 2.1.2
+      lit: 2.7.5
+    dev: false
+
+  /@vaadin/field-base/24.0.8:
+    resolution: {integrity: sha512-sgDW9tibyIr+mlcZqAu1WFkeRHBVcLGlMOQ5omc1u2Rct0oAPMzZCIXBy8UnuG/qK3yotrF2bwW++TEtuuT0Mg==}
+    dependencies:
+      '@open-wc/dedupe-mixin': 1.3.1
+      '@polymer/polymer': 3.5.1
+      '@vaadin/component-base': 24.0.8
+      lit: 2.7.5
+    dev: false
+
+  /@vaadin/icon/24.0.8:
+    resolution: {integrity: sha512-HhaBfAQdh7bI62jAGt8oFzDXoatcc9qxVz2y3ppxzJrzTnhrDQCDx4sXv12DpNTskFd/sYWsgddEa/xRxn3onw==}
+    dependencies:
+      '@polymer/polymer': 3.5.1
+      '@vaadin/component-base': 24.0.8
+      '@vaadin/vaadin-lumo-styles': 24.0.8
+      '@vaadin/vaadin-themable-mixin': 24.0.8
+      lit: 2.7.5
+    dev: false
+
+  /@vaadin/input-container/24.0.8:
+    resolution: {integrity: sha512-Ujcu3C3R4UaPH6L4rXS4IxcZg9QSR5dxIH4OVU5xDJZ743Eesges24sYzawe0Qt4FjvY1MyuAH4chokC2MBovQ==}
+    dependencies:
+      '@polymer/polymer': 3.5.1
+      '@vaadin/component-base': 24.0.8
+      '@vaadin/vaadin-lumo-styles': 24.0.8
+      '@vaadin/vaadin-material-styles': 24.0.8
+      '@vaadin/vaadin-themable-mixin': 24.0.8
+    dev: false
+
+  /@vaadin/item/24.0.8:
+    resolution: {integrity: sha512-r04sbU0xsz+W6Ylehj3P2lCVl9sRcacBo3gi27DFgvy6g2TT8ppWUFmoDlVR7K9xdmKahfM5FbRaauCD11a1+Q==}
+    dependencies:
+      '@open-wc/dedupe-mixin': 1.3.1
+      '@polymer/polymer': 3.5.1
+      '@vaadin/component-base': 24.0.8
+      '@vaadin/vaadin-lumo-styles': 24.0.8
+      '@vaadin/vaadin-material-styles': 24.0.8
+      '@vaadin/vaadin-themable-mixin': 24.0.8
+    dev: false
+
+  /@vaadin/lit-renderer/24.0.8:
+    resolution: {integrity: sha512-W7dXAGt25d1by6LkifdNrX7ApaDeqc5KkvJhhDSTJrYDsvTDRriZKSprHe5bov6TgzY2QyI5fG/dEDQhsbMwuw==}
+    dependencies:
+      lit: 2.7.5
+    dev: false
+
+  /@vaadin/overlay/24.0.8:
+    resolution: {integrity: sha512-PqfncK8qxUgn/riiX/mZ78hbXjltUmgRGwgDoIc6prOSfjHabFTL19d3Dz8FK+WSXaSe4/ziy5QSzbPMG0HeUQ==}
+    dependencies:
+      '@open-wc/dedupe-mixin': 1.3.1
+      '@polymer/polymer': 3.5.1
+      '@vaadin/component-base': 24.0.8
+      '@vaadin/vaadin-lumo-styles': 24.0.8
+      '@vaadin/vaadin-material-styles': 24.0.8
+      '@vaadin/vaadin-themable-mixin': 24.0.8
+    dev: false
+
+  /@vaadin/vaadin-development-mode-detector/2.0.6:
+    resolution: {integrity: sha512-N6a5nLT/ytEUlpPo+nvdCKIGoyNjPsj3rzPGvGYK8x9Ceg76OTe1xI/GtN71mRW9e2HUScR0kCNOkl1Z63YDjw==}
+    dev: false
+
+  /@vaadin/vaadin-lumo-styles/24.0.8:
+    resolution: {integrity: sha512-8ySzJymhgXvvIhiF0rDU5NZ5u06RvMmDdEcnv+qtfJDgOlZMEuA/itsg6QQA25298egP7/J9BSOtmfOeeo5gvQ==}
+    dependencies:
+      '@polymer/polymer': 3.5.1
+      '@vaadin/icon': 24.0.8
+      '@vaadin/vaadin-themable-mixin': 24.0.8
+    dev: false
+
+  /@vaadin/vaadin-material-styles/24.0.8:
+    resolution: {integrity: sha512-dXOYwMwpwEeOe294InTBVq99siyr6QHfFYwuWmkBQV1zEQyh1/AAdLZz6sGUedd903DYcmhyyQwNSK8rwvyC4g==}
+    dependencies:
+      '@polymer/polymer': 3.5.1
+      '@vaadin/vaadin-themable-mixin': 24.0.8
+    dev: false
+
+  /@vaadin/vaadin-themable-mixin/24.0.8:
+    resolution: {integrity: sha512-UtPC5EHxXYUZyIbaDOo8LVSuRpT2gUk7glr0hXFuWt9uYbu5oh9afQYqJ+/uil44MsC3qaTttHqDtg6fRTPI0Q==}
+    dependencies:
+      '@open-wc/dedupe-mixin': 1.3.1
+      lit: 2.7.5
+    dev: false
+
+  /@vaadin/vaadin-usage-statistics/2.1.2:
+    resolution: {integrity: sha512-xKs1PvRfTXsG0eWWcImLXWjv7D+f1vfoIvovppv6pZ5QX8xgcxWUdNgERlOOdGt3CTuxQXukTBW3+Qfva+OXSg==}
+    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
+    requiresBuild: true
+    dependencies:
+      '@vaadin/vaadin-development-mode-detector': 2.0.6
+    dev: false
 
   /@vitejs/plugin-vue/4.2.3_vite@4.3.8+vue@3.3.4:
     resolution: {integrity: sha512-R6JDUfiZbJA9cMiguQ7jxALsgiprjBeHL5ikpXfJCH62pPHtI+JdJ5xWj6Ev73yXSlYl86+blXn1kZHQ7uElxw==}
@@ -444,6 +587,10 @@ packages:
 
   /@vue/shared/3.3.4:
     resolution: {integrity: sha512-7OjdcV8vQ74eiz1TZLzZP4JwqM5fA94K6yntPS5Z25r9HDuGNzaGdgvwKYq6S+MxwF0TFRwe50fIR/MYnakdkQ==}
+
+  /@webcomponents/shadycss/1.11.2:
+    resolution: {integrity: sha512-vRq+GniJAYSBmTRnhCYPAPq6THYqovJ/gzGThWbgEZUQaBccndGTi1hdiUP15HzEco0I6t4RCtXyX0rsSmwgPw==}
+    dev: false
 
   /any-promise/1.3.0:
     resolution: {integrity: sha512-7UvmKalWRt1wgjL1RrGxoSJW/0QZFIegpeGvZG9kjp8vrRu55XTHbwnqq2GpXm9uLbcuhxm3IqX9OB4MZR1b2A==}
@@ -793,6 +940,28 @@ packages:
   /lines-and-columns/1.2.4:
     resolution: {integrity: sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==}
     dev: true
+
+  /lit-element/3.3.2:
+    resolution: {integrity: sha512-xXAeVWKGr4/njq0rGC9dethMnYCq5hpKYrgQZYTzawt9YQhMiXfD+T1RgrdY3NamOxwq2aXlb0vOI6e29CKgVQ==}
+    dependencies:
+      '@lit-labs/ssr-dom-shim': 1.1.1
+      '@lit/reactive-element': 1.6.2
+      lit-html: 2.7.4
+    dev: false
+
+  /lit-html/2.7.4:
+    resolution: {integrity: sha512-/Jw+FBpeEN+z8X6PJva5n7+0MzCVAH2yypN99qHYYkq8bI+j7I39GH+68Z/MZD6rGKDK9RpzBw7CocfmHfq6+g==}
+    dependencies:
+      '@types/trusted-types': 2.0.3
+    dev: false
+
+  /lit/2.7.5:
+    resolution: {integrity: sha512-i/cH7Ye6nBDUASMnfwcictBnsTN91+aBjXoTHF2xARghXScKxpD4F4WYI+VLXg9lqbMinDfvoI7VnZXjyHgdfQ==}
+    dependencies:
+      '@lit/reactive-element': 1.6.2
+      lit-element: 3.3.2
+      lit-html: 2.7.4
+    dev: false
 
   /lru-cache/6.0.0:
     resolution: {integrity: sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==}

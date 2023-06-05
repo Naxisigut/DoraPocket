@@ -1,1 +1,1 @@
-import './web-input';
+import '@vaadin/combo-box';
