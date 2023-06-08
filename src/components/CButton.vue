@@ -1,5 +1,5 @@
 <template>
-  <button class="c-button">
+  <button :disabled="props.disabled" class="c-button">
     <slot name="default"></slot>
   </button>
 </template>
@@ -8,7 +8,8 @@
 import { computed } from 'vue';
 
 const props = defineProps({
-  type: String
+  type: String,
+  disabled: Boolean,
 })
 
 const textColor = computed(() => {
@@ -51,4 +52,9 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+
+:global(.c-button + .c-button){
+  margin-left: 10px;
+}
+
 </style>
