@@ -12,7 +12,7 @@
           <!-- 尺寸 -->
           <div class="flex">
             <label for="" class="w-[80px]">解析内容：</label>
-            <textarea rows="3" v-model="params.text" class="flex-1 pl-2 w-0 outline-none border-slate-500 border-2 rounded-md  text-slate-600"></textarea>
+            <textarea ref="content" rows="3" v-model="params.text" class="flex-1 pl-2 w-0 outline-none border-slate-500 border-2 rounded-md  text-slate-600"></textarea>
           </div>
           <!-- 码元版本 -->
           <div class="flex items-center h-10">
@@ -40,7 +40,7 @@
           </div>
           <!-- 按钮 -->
           <div class=" flex items-center justify-end mt-4">
-            <c-button type="primary">复制内容</c-button>
+            <c-button type="primary" @click="copyContent">复制内容</c-button>
           </div>
         </div>
 
@@ -62,6 +62,8 @@ import {ref, reactive, computed } from "vue";
 import { ComboBoxChangeEvent } from "@vaadin/combo-box";
 import QR from 'qrcode-base64'
 import QRParser from 'qrcode-parser';
+
+/* 二维码表单 */
 const params = reactive({
   text: '',
   typeNumber: 4,
@@ -69,6 +71,7 @@ const params = reactive({
   size: 256
 })
 
+/* 生成二维码 */
 const generatedBaseSrc = computed(()=>{
   return QR.drawImg(params.text, {
     typeNumber: params.typeNumber,
@@ -77,15 +80,16 @@ const generatedBaseSrc = computed(()=>{
   })
 })
 
+/* 功能选择下拉 */
 const funcOpts = reactive([ '生成二维码', '解析二维码' ])
 const currFunc = ref<string>('生成二维码') // 默认值
 const change = (e: ComboBoxChangeEvent<string>)=> currFunc.value = e.target.value
 
+/* 上传图片并解析 */
 const uploader = ref<HTMLInputElement | null>(null)
 const uploadImgSrc = ref<string>('')
 const upload = ()=>uploader.value?.click()
-const getUploadImg = (e: {target: {files: Array<File>}})=>{
-  // console.log(e.target.files);
+const getUploadImg = (e)=>{
   if(!e.target.files.length)return
   const file = e.target.files[0]
   const reader = new FileReader()
@@ -95,16 +99,24 @@ const getUploadImg = (e: {target: {files: Array<File>}})=>{
     parse()
   }
 }
-const parsedContent = ref<string>('')
+
+/* 解析二维码 */
 const parse = () => {
   if(!uploader.value || !uploader.value.files || !uploader.value.files.length)return
   const file = uploader.value.files[0]
   QRParser(file).then((res) => {
-    parsedContent.value = res
     params.text = res
   }).catch((err) => {
     console.log(err);
   })
+}
+
+/* 复制解析内容 */
+const content = ref<HTMLTextAreaElement | null>()
+const copyContent = () => {
+  if(!content.value)return
+  content.value.select()
+  document.execCommand('copy')
 }
 
 </script>

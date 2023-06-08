@@ -5,20 +5,33 @@
 </template>
 
 <script setup lang="ts">
-// import {com} from 'module';
+import { computed } from 'vue';
 
 const props = defineProps({
   type: String
 })
 
+const textColor = computed(() => {
+  if(props.type === 'primary')return '#fff'
+  return 'inherit'
+})
 
-console.log(props.type);
+const bgColor = computed(() => {
+  if(props.type === 'primary')return '#0e7490'
+  return '#f9f9f9'
+})
+
+const borderColor = computed(() => {
+  // if(props.type === 'primary')return '#155e75'
+  return '#646cff'
+})
+
 
 </script>
 
 <style scoped>
 button{
-  background-color: #f9f9f9;
+  background-color: v-bind(bgColor);
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
@@ -28,9 +41,10 @@ button{
   cursor: pointer;
   transition: border-color .25s;
   line-height: normal;
+  color: v-bind(textColor);
 }
 button:hover{
-  border-color: #646cff;
+  border-color: v-bind(borderColor);
 }
 
 button:focus,
