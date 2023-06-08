@@ -15,4 +15,7 @@ app.use(router)
 import directives from './directives';
 app.use(directives)
 
+import globalComponnents from './components';
+app.use(globalComponnents)
+
 app.mount('#app')

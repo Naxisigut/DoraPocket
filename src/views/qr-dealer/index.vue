@@ -1,9 +1,11 @@
 <template>
   <div class="flex items-center justify-center min-h-[inherit]">
     <div class="">
+
       <div class=" text-center">
         <vaadin-combo-box class=" m-8" theme="align-right " .items="funcOpts" .value="currFunc" @change="change"></vaadin-combo-box>
       </div>
+
       <div class="flex">
         <!-- 左：表单 -->
         <div class="flex flex-col justify-center p-4 w-[300px]">
@@ -35,6 +37,10 @@
           <div class="flex items-center h-10">
             <label for="" class="w-[80px]">尺寸：</label>
             <input type="text" v-model="params.size" class="flex-1 pl-2 w-0 outline-none border-slate-500 border-2 rounded-md text-slate-600">
+          </div>
+          <!-- 按钮 -->
+          <div class=" flex items-center justify-end mt-4">
+            <c-button type="primary">复制内容</c-button>
           </div>
         </div>
 
@@ -100,7 +106,6 @@ const parse = () => {
     console.log(err);
   })
 }
-
 
 </script>
 
