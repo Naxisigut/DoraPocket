@@ -35,8 +35,6 @@ const router = useRouter()
 
 /* 模板引用：搜索弹窗 */
 const searchPop = ref()
-/* 模板引用：搜索结果列表 */
-const searchList = ref()
 
 /* 点击搜索栏 */
 const clickSearch = ()=>{

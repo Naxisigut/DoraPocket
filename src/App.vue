@@ -18,3 +18,9 @@ import GlobalSearch from './components/GlobalSearch.vue';
   min-height: calc(100vh - 56px);
 }
 </style>
+
+<style>
+body{
+  background: #fafafa;
+}
+</style>
