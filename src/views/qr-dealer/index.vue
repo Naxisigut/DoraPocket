@@ -1,13 +1,21 @@
 <template>
-  <div class="flex min-h-[inherit]">
-    <div class=" m-auto p-4 shadow-gray-300 shadow-md border border-gray-200 rounded-lg transition-all">
+  <div class="flex min-h-[calc(100vh-56px)]">
+    <!-- sm:384px md:461px lg:614px xl:768px 2xl:922px -->
+    <div :class="{
+      'w-[600px]': currFunc == '生成二维码', 
+      'w-[400px]': currFunc == '解析二维码',
+      'h-[380px]': currFunc == '生成二维码',
+      'h-[500px]': currFunc == '解析二维码',
+      }" 
+      class="m-auto p-4 shadow-gray-300 shadow-md border border-gray-200 rounded-lg transition-all"
+    >
       <div class=" text-center">
         <vaadin-combo-box class=" m-8" theme="align-right " .items="funcOpts" .value="currFunc" @change="change"></vaadin-combo-box>
       </div>
 
-      <div class=" w-fit m-auto">
+      <!-- <div class=""> -->
         <component :is="currCpnt"></component>
-      </div>
+      <!-- </div> -->
 
     </div>
   </div>

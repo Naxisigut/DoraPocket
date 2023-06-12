@@ -1,8 +1,8 @@
 <template>
-  <div class="flex items-center">
+  <div class="flex items-center justify-center">
     <!-- 左：表单 -->
-    <div class="p-4 w-[400px]">
-      <!-- 尺寸 -->
+    <div class="p-4 flex-1 max-w-[400px] min-w-[300px]">
+      <!-- 内容 -->
       <div class="flex">
         <label for="" class="w-[80px]">内容：</label>
         <textarea ref="content" rows="3" v-model="params.text" class="flex-1 w-0 pl-2 outline-none border-slate-500 border-2 rounded-md  text-slate-600"></textarea>
@@ -39,7 +39,7 @@
 
     <!-- 右：图片 -->
     <div v-if="params.text" class=" flex flex-col justify-center p-4 border-l-2 border-slate-500">
-      <img :src="generatedBaseSrc" alt="">
+      <img :src="generatedBaseSrc" class=" w-[150px] md:w-[200px]" alt="">
     </div>
     
   </div>

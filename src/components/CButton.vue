@@ -19,7 +19,7 @@ const textColor = computed(() => {
 
 const bgColor = computed(() => {
   if(props.type === 'primary')return '#0e7490'
-  return '#f9f9f9'
+  return '#f2f2f2'
 })
 
 const borderColor = computed(() => {
