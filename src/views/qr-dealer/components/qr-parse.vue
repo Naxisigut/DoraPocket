@@ -14,20 +14,21 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import QRParser from 'qrcode-parser';
+import { file2Url } from '@/utils/file';
+import { copyText, call } from '@/utils/other';
 
 /* 上传图片并解析 */
 const uploader = ref<HTMLInputElement | null>(null)
 const uploadImgSrc = ref<string>('')
 const upload = ()=>uploader.value?.click()
 const getUploadImg = (e)=>{
+  // if(!e.target)return
   if(!e.target.files.length)return
   const file = e.target.files[0]
-  const reader = new FileReader()
-  reader.readAsDataURL(file)
-  reader.onload = () => {
-    uploadImgSrc.value = reader.result as string
+  file2Url(file).then((res) => {
+    uploadImgSrc.value = res
     parse()
-  }
+  })
 }
 
 /* 解析二维码 */
@@ -45,9 +46,8 @@ const parse = () => {
 /* 复制解析内容 */
 const contentTextArea = ref<HTMLTextAreaElement | null>()
 const copyContent = () => {
-  if(!contentTextArea.value)return
-  contentTextArea.value.select()
-  document.execCommand('copy')
+  // copyText(content.value)
+  call('13333333333')
 }
 
 </script>
