@@ -1,6 +1,5 @@
 <template>
   <div class="flex min-h-[calc(100vh-56px)]">
-    <!-- sm:384px md:461px lg:614px xl:768px 2xl:922px -->
     <div :class="{
       'w-[600px]': currFunc == '生成二维码', 
       'w-[400px]': currFunc == '解析二维码',
@@ -13,9 +12,7 @@
         <vaadin-combo-box class=" m-8" theme="align-right " .items="funcOpts" .value="currFunc" @change="change"></vaadin-combo-box>
       </div>
 
-      <!-- <div class=""> -->
-        <component :is="currCpnt"></component>
-      <!-- </div> -->
+      <component :is="currCpnt"></component>
 
     </div>
   </div>
@@ -26,8 +23,6 @@ import {ref, reactive, computed } from "vue";
 import { ComboBoxChangeEvent } from "@vaadin/combo-box";
 import QrGenerate from './components/qr-generate.vue';
 import QrParse from './components/qr-parse.vue';
-
-
 
 /* 功能选择下拉 */
 const funcOpts = reactive([ '生成二维码', '解析二维码' ])

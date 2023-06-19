@@ -46,8 +46,7 @@ const parse = () => {
 /* 复制解析内容 */
 const contentTextArea = ref<HTMLTextAreaElement | null>()
 const copyContent = () => {
-  // copyText(content.value)
-  call('13333333333')
+  copyText(content.value)
 }
 
 </script>

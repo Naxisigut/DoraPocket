@@ -1,5 +1,5 @@
 <template>
-  <div class=" my-5 text-center text-sm leading-6">
+  <div v-if="profile" class=" my-5 text-center text-sm leading-6">
     <div class=" w-[150px] h-[150px] rounded-full overflow-hidden mx-auto border-stone-500 border">
       <img :src="profile.avatar_url" alt="">
     </div>
@@ -24,40 +24,36 @@
 <script setup lang="ts">
 import { Ref, ref } from 'vue';
 
-let profile: Ref<Record<string, any>> = ref({})
+let profile: Ref<GitHubProfile | null> = ref(null)
+// let profile: Ref<Record<string, any>> = ref({})
 let repos: Ref<Array<Repository>> = ref([])
 
+/* 简单封装fetch */
 function fetchGithub(url: string){
   return new Promise<any>((resolve, reject) => {
     fetch(url).then((response) => {
-      if(response.status !== 200){
-        reject(new Error(response.status.toString()))
-      }
-      return response.json()
-    }).then((res) => {
-      resolve(res)
-    }).catch((err) => {
+      // console.log(response);
+      // if(response.status !== 200){
+      //.json()返回一个Promise，其结果为json parse后的对象
+      response.ok ? resolve(response.json()) : reject(new Error(response.status.toString()))
+    })
+    .catch((err) => {
       reject(err)
     })
     
   })
 }
 
-fetchGithub('https://api.github.com/users/Naxisigut').then((res) => {
+/* 获取用户数据&仓库数据 */
+fetchGithub('https://api.github.com/users/Naxisigut').then((res: GitHubProfile) => {
   profile.value = res
-  console.log("profile =", profile.value)
-  return fetchGithub(profile.value.repos_url)
+  return fetchGithub(res.repos_url)
 }).then((res) => {
   // console.log("repos =", repos)
   repos.value = res
 }).catch((err) => {
   console.log('err', err.message);
 })
-
-
-
-// Object.assign(profile, res)
-// Object.assign(repos, res)
 
 </script>
 

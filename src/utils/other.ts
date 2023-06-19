@@ -14,6 +14,5 @@ export const copyText = (str: string) => {
 }
 
 export const call = (phoneNumber: string) => {
-  console.log(1111);
   window.location.href = "tel://" + phoneNumber
 }
