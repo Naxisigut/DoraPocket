@@ -1,9 +1,11 @@
 <template>
   <div class="flex min-h-[calc(100vh-56px)]">
+    <!-- 'h-[600px]': currFunc == '生成二维码', -->
     <div :class="{
-      'w-[600px]': currFunc == '生成二维码', 
+      'w-[560px]': currFunc == '生成二维码', 
+      'sm:w-[640px]': currFunc == '生成二维码', 
+      'sm:h-[380px]': currFunc == '生成二维码',
       'w-[400px]': currFunc == '解析二维码',
-      'h-[380px]': currFunc == '生成二维码',
       'h-[500px]': currFunc == '解析二维码',
       }" 
       class="m-auto p-4 shadow-gray-300 shadow-md border border-gray-200 rounded-lg transition-all"

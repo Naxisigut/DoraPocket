@@ -22,7 +22,7 @@
 
 /** directive
  * 1. 若需要在指令的元素上绑定监听，不要使用简写形式，避免在元素updated时多次执行绑定
- * 2. 若需要给window绑定监听，注意在元素销毁unmounted时移除监听
+ * 2. 若需要给window绑定监听，注意在元素销毁前beforeUnmount移除监听
  */
 
 import {Directive} from 'vue';
@@ -50,50 +50,61 @@ const dialogModalClose:DirectiveObj = {
 /* dialog标签 监听Ctrl+K 控制dialog显隐 */
 const dialogKeyOpen: DirectiveObj = {
   name: 'k-open',
-  preventDefault: (e: KeyboardEvent) => {
-    if(e.code === 'KeyK' && e.ctrlKey){
-      e.preventDefault()
-    }
-  },
-  ctrlKOpen: null,
   directive:{
     mounted: (el:HTMLDialogElement) => {
+      // console.log('mounted');
       // 禁止ctrl+k默认行为
-      window.addEventListener('keydown', dialogKeyOpen.preventDefault)
-
-      dialogKeyOpen.ctrlKOpen = (e:KeyboardEvent) => {
-        if(e.ctrlKey && e.code === 'KeyK' && el.getAttribute('open') === null){
-          el.showModal()
-        }
+      const keyDownHandler = (e: KeyboardEvent) => {
+        if(e.code === 'KeyK' && e.ctrlKey) e.preventDefault()
       }
+      el.keyDownHandler = keyDownHandler
+      window.addEventListener('keydown', keyDownHandler)
 
       // ctrl + k 打开dialog
-      window.addEventListener('keyup', dialogKeyOpen.ctrlKOpen)
+      const keyUpHandler = (e:KeyboardEvent) => {
+        if(e.ctrlKey && e.code === 'KeyK' && el.getAttribute('open') === null)el.showModal()
+      }
+      el.keyUpHandler = keyUpHandler
+      window.addEventListener('keyup', keyUpHandler)
     },
-    unmounted: () => {
+    beforeUnmount: (el: HTMLDialogElement) => {
       // 元素销毁时移除全局监听
-      window.removeEventListener('keydown', dialogKeyOpen.preventDefault)
-      window.removeEventListener('keyup', dialogKeyOpen.ctrlKOpen)
+      window.removeEventListener('keydown', el.keyDownHandler)
+      window.removeEventListener('keyup', el.keyUpHandler)
     },
   }
 }
 
-/* dialog标签  */
+/** 指令：监听上下键和enter键，对列表项进行选择
+ * 用法：
+ * 1.该指令应绑定在欲选择项列表的祖先元素上；
+ * 2.页面中处于聚焦状态(参见activeElement)的元素为指令绑定元素的子孙元素时，
+ *   上下键选择和enter键确认的功能才会生效
+ * 3.欲选择项的类名须包含key-selectable
+ * 4.选中项的样式通过.key-selectable[selected]选择器来定制
+ * 5.enter键功能通过对欲选择项的click事件进行监听来完成
+ */
 const keySelect:DirectiveObj = {
   name: 'key-select',
   directive:{
     mounted: (el:HTMLInputElement) => {
-      
+      /* 页面聚焦元素为el的子孙元素时，监听才会被触发，功能生效 */
       el.addEventListener('keydown', (e) => {
-        if(e.code !== 'ArrowUp' && e.code !== 'ArrowDown')return
-        e.preventDefault()
-
-        if(e.code === "ArrowUp" || "ArrowDown"){
-          
+        // console.log(e);
+        let actType = ''
+        if(e.code === 'ArrowUp' || e.code === 'ArrowDown') {
+          actType = "select"
+        }else if(e.code === 'Enter' || e.code === 'NumpadEnter'){
+          actType = 'confirm'
         }
-        const list = el.querySelectorAll('li')
+        if(!actType)return
+        e.preventDefault() // 阻止默认行为
+
+        /* 获取所有可选项 */
+        const list = el.querySelectorAll('.key-selectable')
         if(!list.length)return
         
+        /* 获取当前选中项的下标，若当前无选中项，selectedIdx为-1 */
         let selectedIdx = -1
         for(let i = 0; i<list.length; i++){
           if(list[i].hasAttribute('selected')){
@@ -102,22 +113,29 @@ const keySelect:DirectiveObj = {
           }
         }
 
-        if(selectedIdx !== -1)list[selectedIdx].removeAttribute('selected')
-        let newSelectedIdx = -1
-        if(e.code === 'ArrowUp'){
-          newSelectedIdx = selectedIdx -1          
-        }else if(e.code === 'ArrowDown'){
-          newSelectedIdx = selectedIdx +1
+        if(actType === 'select'){
+          /* 移除当前选中项上的selected属性 */
+          if(selectedIdx !== -1)list[selectedIdx].removeAttribute('selected')
+  
+          /* 获取新选中项的下标 */
+          let newSelectedIdx = e.code === 'ArrowUp' ? selectedIdx -1 : selectedIdx +1
+          if(newSelectedIdx < 0)newSelectedIdx = list.length -1
+          if(newSelectedIdx >= list.length)newSelectedIdx = 0
+  
+          /* 为新选中项设置selected属性，并移动视图至该项 */
+          list[newSelectedIdx].setAttribute('selected', '')
+          list[newSelectedIdx].scrollIntoView({
+            behavior: 'smooth',
+            block: 'end',
+            inline: 'nearest'
+          })
+          return
         }
-        if(newSelectedIdx < 0)newSelectedIdx = list.length -1
-        if(newSelectedIdx >= list.length)newSelectedIdx = 0
 
-        list[newSelectedIdx].setAttribute('selected', '')
-        list[newSelectedIdx].scrollIntoView({
-          behavior: 'smooth',
-          block: 'end',
-          inline: 'nearest'
-        })
+        if(actType === 'confirm'){
+          list[selectedIdx].click()
+          return
+        }
       })
     },
   }
@@ -125,8 +143,6 @@ const keySelect:DirectiveObj = {
 
 export default {
   install(app){
-    app.directive(dialogModalClose.name, dialogModalClose.directive)
-    app.directive(dialogKeyOpen.name, dialogKeyOpen.directive)
     app.directive(keySelect.name, keySelect.directive)
   }
 }

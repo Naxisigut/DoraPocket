@@ -1,7 +1,7 @@
 <template>
-  <div class="flex items-center justify-center">
+  <div class=" h-[calc(100%-108px)] flex items-center justify-center flex-wrap sm:flex-nowrap">
     <!-- 左：表单 -->
-    <div class="p-4 flex-1 max-w-[400px] min-w-[300px]">
+    <div class="p-4 sm:flex-1 min-w-[300px] max-w-[400px]">
       <!-- 内容 -->
       <div class="flex">
         <label for="" class="w-[80px]">内容：</label>
@@ -38,8 +38,8 @@
     </div>
 
     <!-- 右：图片 -->
-    <div v-if="params.text" class=" flex flex-col justify-center p-4 border-l-2 border-slate-500">
-      <img :src="generatedBaseSrc" class=" w-[150px] md:w-[200px]" alt="">
+    <div v-if="params.text" class=" flex flex-col justify-center p-4 sm:border-l-2 border-slate-500">
+      <img :src="generatedBaseSrc" class="w-[200px]" alt="">
     </div>
     
   </div>
