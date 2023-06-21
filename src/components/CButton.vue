@@ -44,13 +44,25 @@ button{
   line-height: normal;
   color: v-bind(textColor);
 }
+
+/* 鼠标悬浮 */
 button:hover{
   border-color: v-bind(borderColor);
 }
 
-button:focus,
+/* 鼠标点击后 */
+button:focus:not(:focus-visible){
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* 键盘选中 */
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* 鼠标点击中 */
+button:active:focus{
+  
 }
 
 :global(.c-button + .c-button){

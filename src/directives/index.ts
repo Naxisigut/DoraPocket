@@ -32,48 +32,6 @@ type DirectiveObj = {
   [propName: string]: any
 }
 
-/* dialog标签 点击modal后关闭dialog */
-const dialogModalClose:DirectiveObj = {
-  name: 'modal-close',
-  directive:{
-    mounted: (el:HTMLDialogElement) => {
-      el.setAttribute('modal', '')
-      el.addEventListener('click', (e)=>{
-        if(!e.target)return
-        const modalClicked = e.target.hasAttribute('modal')
-        if(modalClicked)el.close()
-      })
-    },
-  }
-}
-
-/* dialog标签 监听Ctrl+K 控制dialog显隐 */
-const dialogKeyOpen: DirectiveObj = {
-  name: 'k-open',
-  directive:{
-    mounted: (el:HTMLDialogElement) => {
-      // console.log('mounted');
-      // 禁止ctrl+k默认行为
-      const keyDownHandler = (e: KeyboardEvent) => {
-        if(e.code === 'KeyK' && e.ctrlKey) e.preventDefault()
-      }
-      el.keyDownHandler = keyDownHandler
-      window.addEventListener('keydown', keyDownHandler)
-
-      // ctrl + k 打开dialog
-      const keyUpHandler = (e:KeyboardEvent) => {
-        if(e.ctrlKey && e.code === 'KeyK' && el.getAttribute('open') === null)el.showModal()
-      }
-      el.keyUpHandler = keyUpHandler
-      window.addEventListener('keyup', keyUpHandler)
-    },
-    beforeUnmount: (el: HTMLDialogElement) => {
-      // 元素销毁时移除全局监听
-      window.removeEventListener('keydown', el.keyDownHandler)
-      window.removeEventListener('keyup', el.keyUpHandler)
-    },
-  }
-}
 
 /** 指令：监听上下键和enter键，对列表项进行选择
  * 用法：

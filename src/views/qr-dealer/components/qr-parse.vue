@@ -15,7 +15,7 @@
 import { ref } from "vue";
 import QRParser from 'qrcode-parser';
 import { file2Url } from '@/utils/file';
-import { copyText, call } from '@/utils/other';
+import { copyText } from '@/utils/other';
 
 /* 上传图片并解析 */
 const uploader = ref<HTMLInputElement | null>(null)
