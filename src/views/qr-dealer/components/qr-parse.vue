@@ -5,6 +5,7 @@
     <textarea ref="contentTextArea" disabled rows="3" v-model="content" class="pl-2 outline-none border-slate-500 border-2 rounded-md text-slate-600 w-[300px]"></textarea>
     <input ref="uploader" type="file" hidden @change="getUploadImg">
     <div class=" mt-4">
+      <c-button>text</c-button>
       <c-button @click="upload">上传图片</c-button>
       <c-button :disabled="!content" type="primary" @click="copyContent">复制内容</c-button>
     </div>
