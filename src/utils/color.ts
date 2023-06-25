@@ -28,17 +28,23 @@ export function Rgb2HSL({R, G, B}: Record<'R'|'G'|'B', number>) {
   }
   
   H = Math.round(H * 360);
-  S = Math.round(S * 100);
-  L = Math.round(L * 100);
+  S = Math.round(S * 100) / 100;
+  L = Math.round(L * 100) / 100;
 
   return {H, S, L};
 }
 
+/** 将RGB转化为Hex
+ * 
+ * @param RGB_Obj，其键值R,G,B分别为0~255的整数
+ * @returns Hex_String, 十六进制色彩字符串
+ */
 function Rgb2Hex({R, G, B}: Record<'R'|'G'|'B', number>){
-  
+  const r = R.toString(16)
+  const g = G.toString(16)
+  const b = B.toString(16)
+  return `#${r}${g}${b}`
 }
-
-// function Rgb2
 
 /** 格式化十六进制色彩字符串
  * 
@@ -70,7 +76,7 @@ function formatHex(colorStr: string){
   return `#${colorStr}`
 }
 
-/** 将十六进制字符串解析为RGBA对象
+/** 将十六进制字符串解析为RGB对象
  * 
  * @param Hex 
  * @returns RGBA_Obj
@@ -112,67 +118,92 @@ function parseRgb(colorStr: string){
   
 }
 
+/** 抽取不透明度
+ * 完全不透明为1，完全透明为0
+ * @param color 
+ * @returns opacity 不透明度 0~1的数字
+ */
+function extractOpacity(color: string){
+  let opacity = 1
+  if(hexPattern.test(color)){
+    if(/^#/.test(color)){
+      color = color.slice(1)
+    }
+    if(color.length === 8){
+      opacity = Math.round(parseInt(color.slice(6), 16) * 100 /255) / 100
+    }
+  } else if(rgbaPattern.test(color)){
+    const matches = color.match(rgbaPattern)
+    if(!matches){
+      throw new Error('Wrong Color String!')
+    }
+    const arr = matches[2].split(',')
+    if(arr.length === 4){
+      opacity = Number(arr[3])
+    }
+  }
+  if(isNaN(opacity))throw new Error('Wrong Color String!')
+  return opacity
+}
 
-
-
+function lighten(colorStr: string, ratio: number){
+  const color = new CColor(colorStr)
+  // const 
+}
 
 export class CColor{
   hex: string
-  rgbString: string
   rgbObj: Record<'R' | 'G' | 'B', number> | null
   hslObj: Record<'H' | 'S' | 'L', number> | null
   opacity: number
+  rgba: `rgba(${number}, ${number}, ${number}, ${number})` | ''
+  rgb: `rgb(${number}, ${number}, ${number})` | ''
+  hsl: string | ''
   constructor(color: string){
-    // const hexPattern = /^(#?[0-9a-fA-F]{3}|#?[0-9a-fA-F]{6}|#?[0-9a-fA-F]{8})$/
-    // const rgbaPattern = /(rgb|rgba)\(([^)]+)\)/;
+    try {
+      this.init()
 
-    this.init()
-    this.opacity = this.extractOpacity(color)
+      /* 获取opacity */
+      this.opacity = CColor.extractOpacity(color)
 
-    if(hexPattern.test(color)){
-      this.rgbObj = parseHex(formatHex(color))
-    }else if(rgbaPattern.test(color)){
-      this.rgbObj = parseRgb(color)
+      /* 获取rgbObj */
+      if(hexPattern.test(color)){
+        this.rgbObj = parseHex(formatHex(color))
+      }else if(rgbaPattern.test(color)){
+        this.rgbObj = parseRgb(color)
+      }
+      if(!this.rgbObj) throw new Error('parse fail!')
+      this.rgb = `rgb(${this.rgbObj.R}, ${this.rgbObj.G}, ${this.rgbObj.R})`
+      this.rgba = `rgba(${this.rgbObj.R}, ${this.rgbObj.G}, ${this.rgbObj.R}, ${this.opacity})`
+    
+      /* 获取hslObj */
+      this.hslObj = Rgb2HSL(this.rgbObj)
+      this.hsl = `hsl(${this.hslObj.H}, ${this.hslObj.S * 100}%, ${this.hslObj.L * 100}%)`
+
+      /* 获取hex */
+      let hexOpacity = Math.round(this.opacity * 255).toString(16)
+      if(hexOpacity.length < 0)hexOpacity = '0' + hexOpacity
+      this.hex = Rgb2Hex(this.rgbObj) + hexOpacity
+    } catch (error) {
+      console.error(error)
+      this.init()
     }
-
-    if(!this.rgbObj){
-      throw new Error('parse fail!')
-    }
-    this.hslObj = Rgb2HSL(this.rgbObj)
-    this.hex = formatHex(color)
   }
 
   init(){
-    this.hex = ''
-    this.rgbString = ''
     this.rgbObj = null
     this.hslObj = null
     this.opacity = 1
-  }
-
-  extractOpacity(color: string){
-    let opacity = 1
-    if(hexPattern.test(color)){
-      if(/^#/.test(color)){
-        color = color.slice(1)
-      }
-      if(color.length === 8){
-        opacity = Math.round(parseInt(color.slice(6), 16) * 100 /255) / 100
-        // color = color.slice(0, 6)
-      }
-      // if(color.length === 3){
-      //   color = `${color[0]}${color[0]}${color[1]}${color[1]}${color[2]}${color[2]}`
-      // }
-    } else if(rgbaPattern.test(color)){
-      const matches = color.match(rgbaPattern)
-      if(!matches){
-        throw new Error('Wrong Color String!')
-      }
-      const arr = matches[2].split(',')
-      if(arr.length === 4){
-        opacity = Number(arr[3])
-      }
-    }
-    return opacity
+    this.hex = ''
+    this.hsl = ''
+    this.rgb = ''
+    this.rgba = ''
   }
 }
+
+CColor.extractOpacity = extractOpacity
+CColor.formatHex = formatHex
+CColor.parseHex = parseHex
+CColor.parseRgb = parseRgb
+CColor.Rgb2Hex = Rgb2Hex
+CColor.Rgb2HSL = Rgb2HSL

@@ -8,11 +8,6 @@
 import { computed } from 'vue';
 import { CColor } from '@/utils/color';
 
-// Rgb2HSL({R:255, G: 87, B: 34})
-// console.log(rgbaToHsl(255, 87, 34, 0));
-console.log(new CColor('#3333337D'));
-console.log(new CColor('rgba(51, 51, 51)'));
-
 const props = defineProps({
   type: String,
   disabled: Boolean,
@@ -26,6 +21,13 @@ const textColor = computed(() => {
 const bgColor = computed(() => {
   if(props.type === 'primary')return '#0e7490'
   return '#f2f2f2'
+})
+
+const clickingBgColor = computed(() => {
+  const color = new CColor(bgColor.value)
+  console.log(color);
+  console.log(`hsl(${color.hslObj?.H}, ${color.hslObj && color.hslObj.S * 100}%, ${color.hslObj && (color.hslObj.L * 100 + 5) }%)`);
+  return `hsl(${color.hslObj?.H}, ${color.hslObj && color.hslObj.S * 100}%, ${color.hslObj && (color.hslObj.L * 100 + 5) }%)`
 })
 
 // const borderColor = computed(() => {
@@ -42,7 +44,6 @@ button{
   /* transition: border-color .25s; */
 
   background-color: v-bind(bgColor);
-  /* background-color:  */
   border-radius: 8px;
   padding: 0.6em 1.2em;
   font-size: 1em;
@@ -64,6 +65,7 @@ button:hover{
 
 /* 鼠标点击后 */
 button:focus:not(:focus-visible){
+  /* background: blue; */
 }
 
 /* 键盘选中 */
@@ -73,7 +75,8 @@ button:focus-visible {
 
 /* 鼠标点击中：由于优先级，须放在最后 */
 button:active:focus{
-  
+  /* background-color: black ; */
+  background-color: v-bind(clickingBgColor);
 }
 
 :global(.c-button + .c-button){
