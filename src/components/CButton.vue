@@ -1,5 +1,8 @@
 <template>
-  <button :disabled="props.disabled" class="c-button">
+  <span v-if="props.type === 'text'" class="c-button">
+    <slot name="default"></slot>
+  </span>
+  <button ref="c-btn" v-else :disabled="props.disabled" class="c-button">
     <slot name="default"></slot>
   </button>
 </template>
@@ -9,8 +12,17 @@ import { computed } from 'vue';
 import { CColor } from '@/utils/color';
 
 const props = defineProps({
-  type: String,
-  disabled: Boolean,
+  disabled: Boolean, // 禁用按钮
+  round: Boolean, // 胶囊按钮
+  type: { // 按钮类型
+    type: String,
+    validator: (val: string) => ['primary', 'plain', 'text'].includes(val),
+  },
+  size: { // 按钮尺寸
+    type: String,
+    validator: (val: string) => ['mini', 'small', 'normal'].includes(val),
+    default: () => 'normal'
+  },
 })
 
 const textColor = computed(() => {
@@ -18,35 +30,60 @@ const textColor = computed(() => {
   return 'inherit'
 })
 
-const bgColor = computed(() => {
-  if(props.type === 'primary')return '#0e7490'
+const mainColor = computed(() => {
+  if(props.type === 'primary' || props.type === 'text')return '#0e7490'
+  if(props.type === 'plain')return '#fff'
   return '#f2f2f2'
+  // return props.type === 'text' ? '#0e7490' : '#f2f2f2'
 })
 
-const clickingBgColor = computed(() => {
-  const color = new CColor(bgColor.value)
-  console.log(color);
-  console.log(`hsl(${color.hslObj?.H}, ${color.hslObj && color.hslObj.S * 100}%, ${color.hslObj && (color.hslObj.L * 100 + 5) }%)`);
-  return `hsl(${color.hslObj?.H}, ${color.hslObj && color.hslObj.S * 100}%, ${color.hslObj && (color.hslObj.L * 100 + 5) }%)`
+const borderColor = computed(() => {
+  if(props.type === 'plain')return '#ccc'
+  return 'transparent'
 })
 
-// const borderColor = computed(() => {
-//   // if(props.type === 'primary')return '#155e75'
-//   return '#646cff'
-// })
+const clickingMainColor = computed(() => {
+  return CColor.lighten(mainColor.value, 0.05)
+})
+
+const fontSize = computed(() => {
+  switch (props.size) {
+    case 'mini':
+      return '12px'
+    case 'small':
+      return '14px'
+    case 'normal':
+      return '16px'
+    default:
+      return '16px'
+  }
+})
+
+const borderRadius = computed(() => {
+  if(props.round)return '999px'
+  return '8px'
+})
+
 
 
 </script>
 
 <style scoped>
-button{
-  /* border: 1px solid transparent; */
-  /* transition: border-color .25s; */
+span{
+  color: v-bind(mainColor);
+  cursor: pointer;
+}
+span:hover{
+  color: v-bind(clickingMainColor)
+}
 
-  background-color: v-bind(bgColor);
-  border-radius: 8px;
+button{
+  border: 1px solid v-bind(borderColor);
+  background-color: v-bind(mainColor);
+  border-radius: v-bind(borderRadius);
   padding: 0.6em 1.2em;
-  font-size: 1em;
+  /* font-size: 1em; */
+  font-size: v-bind(fontSize);
   font-weight: 500;
   font-family: inherit;
   cursor: pointer;
@@ -56,16 +93,18 @@ button{
   color: v-bind(textColor);
 }
 
-/* 鼠标悬浮 */
-button:hover{
-  /* border-color: v-bind(borderColor); */
+/* 按钮禁用 */
+button:disabled{
+  cursor: not-allowed;
+}
 
+/* 鼠标悬浮 */
+button:hover:not(:disabled){
   outline: 2px solid -webkit-focus-ring-color;
 }
 
 /* 鼠标点击后 */
 button:focus:not(:focus-visible){
-  /* background: blue; */
 }
 
 /* 键盘选中 */
@@ -75,8 +114,7 @@ button:focus-visible {
 
 /* 鼠标点击中：由于优先级，须放在最后 */
 button:active:focus{
-  /* background-color: black ; */
-  background-color: v-bind(clickingBgColor);
+  background-color: v-bind(clickingMainColor);
 }
 
 :global(.c-button + .c-button){

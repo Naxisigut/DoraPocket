@@ -125,7 +125,9 @@ function parseRgb(colorStr: string){
  */
 function extractOpacity(color: string){
   let opacity = 1
-  if(hexPattern.test(color)){
+  if(color === 'transparent') {
+    opacity = 0
+  }else if(hexPattern.test(color)){
     if(/^#/.test(color)){
       color = color.slice(1)
     }
@@ -146,9 +148,34 @@ function extractOpacity(color: string){
   return opacity
 }
 
+/** 增强亮度
+ * 
+ * @param colorStr string 色彩字符串
+ * @param ratio number 亮度增强系数
+ * @returns string hsl色彩字符串
+ */
 function lighten(colorStr: string, ratio: number){
   const color = new CColor(colorStr)
-  // const 
+  if(!color.hslObj)return
+  let { H, S, L } = color.hslObj
+  L = L + ratio
+  L = L > 1 ? 1 : L < 0 ? 0 : L
+  return `hsla(${H}, ${S * 100}%, ${L * 100}%, ${color.opacity})`
+}
+
+/** 降低饱和度
+ * 
+ * @param colorStr string 色彩字符串
+ * @param ratio number 亮度增强系数
+ * @returns string hsl色彩字符串
+ */
+function dim(colorStr: string, ratio: number){
+  const color = new CColor(colorStr)
+  if(!color.hslObj)return
+  let { H, S, L } = color.hslObj
+  S = S - ratio
+  S = S > 1 ? 1 : S < 0 ? 0 : S
+  return `hsl(${H}, ${S * 100}%, ${L * 100}%)`
 }
 
 export class CColor{
@@ -159,6 +186,7 @@ export class CColor{
   rgba: `rgba(${number}, ${number}, ${number}, ${number})` | ''
   rgb: `rgb(${number}, ${number}, ${number})` | ''
   hsl: string | ''
+  hsla: string | ''
   constructor(color: string){
     try {
       this.init()
@@ -171,6 +199,8 @@ export class CColor{
         this.rgbObj = parseHex(formatHex(color))
       }else if(rgbaPattern.test(color)){
         this.rgbObj = parseRgb(color)
+      }else if(color === 'transparent'){
+        this.rgbObj = {R: 255, G: 255, B: 255}
       }
       if(!this.rgbObj) throw new Error('parse fail!')
       this.rgb = `rgb(${this.rgbObj.R}, ${this.rgbObj.G}, ${this.rgbObj.R})`
@@ -179,6 +209,7 @@ export class CColor{
       /* 获取hslObj */
       this.hslObj = Rgb2HSL(this.rgbObj)
       this.hsl = `hsl(${this.hslObj.H}, ${this.hslObj.S * 100}%, ${this.hslObj.L * 100}%)`
+      this.hsla = `hsla(${this.hslObj.H}, ${this.hslObj.S * 100}%, ${this.hslObj.L * 100}%, ${this.opacity})`
 
       /* 获取hex */
       let hexOpacity = Math.round(this.opacity * 255).toString(16)
@@ -196,14 +227,19 @@ export class CColor{
     this.opacity = 1
     this.hex = ''
     this.hsl = ''
+    this.hsla = ''
     this.rgb = ''
     this.rgba = ''
   }
 }
 
+/* 静态方法 */
 CColor.extractOpacity = extractOpacity
 CColor.formatHex = formatHex
 CColor.parseHex = parseHex
 CColor.parseRgb = parseRgb
 CColor.Rgb2Hex = Rgb2Hex
 CColor.Rgb2HSL = Rgb2HSL
+
+CColor.lighten = lighten
+CColor.dim = dim
