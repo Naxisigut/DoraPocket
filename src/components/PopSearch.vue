@@ -58,7 +58,6 @@ const searchRes = computed(()=>{
 const searchPop = ref()
 const clickSearch = ()=>{
   searchPop.value.showModal()
-  console.log(111, document.activeElement)
 }
 
 

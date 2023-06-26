@@ -6,7 +6,7 @@
     <input ref="uploader" type="file" hidden @change="getUploadImg">
     <div class=" mt-4">
       <c-button @click="upload">上传图片</c-button>
-      <c-button :disabled="!content" type="primary" round @click="copyContent">复制内容</c-button>
+      <c-button :disabled="!content" type="primary" @click="copyContent">复制内容</c-button>
     </div>
   </div>
 </template>

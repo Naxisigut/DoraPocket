@@ -34,7 +34,6 @@ const mainColor = computed(() => {
   if(props.type === 'primary' || props.type === 'text')return '#0e7490'
   if(props.type === 'plain')return '#fff'
   return '#f2f2f2'
-  // return props.type === 'text' ? '#0e7490' : '#f2f2f2'
 })
 
 const borderColor = computed(() => {
@@ -63,8 +62,6 @@ const borderRadius = computed(() => {
   if(props.round)return '999px'
   return '8px'
 })
-
-
 
 </script>
 
