@@ -1,7 +1,7 @@
 <template>
   <div class="panel-with-more relative overflow-hidden">
     <slot></slot>  
-    <div v-if="isFold" @click="toggle" class=" absolute bottom-0">展开</div>
+    <div v-if="isFold" @click="toggle" class=" absolute bottom-0 w-full text-center backdrop-blur-sm">展开</div>
     <span v-else @click="toggle" class=" sticky top-10">收起</span>
   </div>
 </template>
