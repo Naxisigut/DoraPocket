@@ -13,9 +13,7 @@
       <p class="">{{ profile.location }}</p>
     </div>
 
-   
-    
-    <PanelWithMore v-if="repos.length" v-model="reposPanel.isFold" >
+    <PanelFold v-if="repos.length" v-model="reposPanel.isFold" >
       <h2 class=" px-6 text-2xl">🐣Repository</h2>
       <ul class=" p-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center w-full mx-auto">
         <li v-for="(item, index) in repos" :key="index" class=" p-4 shadow-md w-full rounded-md bg-neutral-100 hover:scale-110 transition-transform">
@@ -25,9 +23,9 @@
           </a>
         </li>
       </ul>
-    </PanelWithMore>
+    </PanelFold>
 
-    <PanelWithMore v-if="starred.length" v-model="starredPanel.isFold">
+    <PanelFold v-if="starred.length" v-model="starredPanel.isFold">
       <h2 class=" px-6 text-2xl">🌌Stars</h2>
       <ul class=" p-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center w-full mx-auto">
         <li v-for="(item, index) in starred" :key="index" class=" p-4 shadow-md w-full rounded-md bg-neutral-100 hover:scale-110 transition-transform">
@@ -37,7 +35,7 @@
           </a>
         </li>
       </ul>
-    </PanelWithMore>
+    </PanelFold>
   </div>
 
 
@@ -45,7 +43,7 @@
 
 <script setup lang="ts">
 import { reactive, Ref, ref } from 'vue';
-import PanelWithMore from './components/PanelWithMore.vue';
+import PanelFold from './components/PanelFold.vue';
 
 
 /* 简单封装fetch */
