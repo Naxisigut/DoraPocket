@@ -14,7 +14,7 @@
     </div>
     
     <h2 class=" px-6 text-2xl">Repository</h2>
-    <PanelWithMore>
+    <PanelWithMore v-model="reposPanel.isFold" :ready="reposPanel.ready">
       <ul class=" p-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center w-full mx-auto">
         <li v-for="(item, index) in repos" :key="index" class=" p-4 shadow-md w-full rounded-md bg-neutral-100 hover:scale-110 transition-transform">
           <a :href="item.html_url" target="_blank" class=" block w-full h-full  ">
@@ -26,7 +26,7 @@
     </PanelWithMore>
 
     <h2 class=" px-6 text-2xl">Stars</h2>
-    <PanelWithMore>
+    <PanelWithMore v-model="starredPanel.isFold" :ready="starredPanel.ready">
       <ul class=" p-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center w-full mx-auto">
         <li v-for="(item, index) in starred" :key="index" class=" p-4 shadow-md w-full rounded-md bg-neutral-100 hover:scale-110 transition-transform">
           <a :href="item.html_url" target="_blank" class=" block w-full h-full  ">
@@ -42,10 +42,8 @@
 </template>
 
 <script setup lang="ts">
-import { Ref, ref } from 'vue';
+import { reactive, Ref, ref } from 'vue';
 import PanelWithMore from './components/PanelWithMore.vue';
-
-// let profile: Ref<Record<string, any>> = ref({})
 
 /* 简单封装fetch */
 function fetchGithub(url: string){
@@ -76,22 +74,36 @@ fetchGithub('https://api.github.com/users/Naxisigut').then((res: GitHubProfile) 
 })
 
 /* 获取仓库数据 */
+const reposPanel = reactive({
+  isFold: true,
+  loading: false,
+  ready: false
+})
 let repos: Ref<Array<Repository>> = ref([])
 const getRepos = () => {
   if(!profile.value)return
   fetchGithub(profile.value.repos_url).then((res) => {
     repos.value = res
+    reposPanel.ready = true
   })
 }
 
 /* 获取star的仓库数据 */
+const starredPanel = reactive({
+  isFold: true,
+  loading: false,
+  ready: false
+})
 let starred = ref<Array<Record<string, any>>>([])
 const getStarred = () => {
   if(!profile.value)return
   fetchGithub(profile.value.starred_url.split('{')[0]).then((res) => {
     starred.value = res
+    starredPanel.ready = true
   })
 }
+
+
 
 </script>
 
