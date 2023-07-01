@@ -1,3 +1,9 @@
+<script lang="ts">
+export default {
+  name: "QRDealer",
+};
+</script>
+
 <template>
   <div class="flex min-h-[calc(100vh-56px)]">
     <!-- 'h-[600px]': currFunc == '生成二维码', -->

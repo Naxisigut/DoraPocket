@@ -1,3 +1,10 @@
+<script lang="ts">
+export default {
+  name: "GithubShortcuts",
+};
+</script>
+
+
 <template>
   <div class="  mx-auto max-w-[960px]">
     <div v-if="profile" class=" pb-10 my-5 text-center text-sm leading-6">
