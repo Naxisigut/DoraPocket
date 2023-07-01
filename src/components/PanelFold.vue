@@ -22,11 +22,7 @@ const props = defineProps({
   modelValue:{
     type: Boolean,
     required: true
-  },
-  loading:{
-    type: Boolean,
-    default: false
-  },
+  }
 })
 
 /* 是否折叠及展开功能 */

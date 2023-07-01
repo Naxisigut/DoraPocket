@@ -50,7 +50,7 @@ export default {
 
 <script setup lang="ts">
 import { reactive, Ref, ref } from 'vue';
-import PanelFold from './components/PanelFold.vue';
+import PanelFold from '@/components/PanelFold.vue';
 
 
 /* 简单封装fetch */
