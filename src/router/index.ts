@@ -16,6 +16,11 @@ const routes: RouteRecordRaw[] = [
     name: 'github-shortcuts',
     component: ()=>import('@/views/github-shortcuts/index.vue'),
   },
+  {
+    path: '/color-trans',
+    name: 'color-trans',
+    component: ()=>import('@/views/color-trans/index.vue'),
+  },
 ]
 
 // ()=>import('@/views/search-page/index.vue')
