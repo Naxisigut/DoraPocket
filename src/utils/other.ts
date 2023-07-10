@@ -1,3 +1,5 @@
+/* v1.01 */
+
 /** 复制指定文本到剪切板
  * 
  * @param string 
@@ -13,6 +15,10 @@ export const copyText = (str: string) => {
   return copyRes
 }
 
+/** 浏览器调用拨打电话
+ * 
+ * @param phoneNumber 
+ */
 export const call = (phoneNumber: string) => {
   window.location.href = "tel://" + phoneNumber
 }
