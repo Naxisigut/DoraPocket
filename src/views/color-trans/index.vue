@@ -6,22 +6,19 @@ export default {
 
 
 <template>
-  <div class="w-full p-[20px]">
-    <div class=" h-[80vh] shadow-lg border border-gray-200 rounded-xl">
-      <div class=" ">
-        <a-select
-          v-model:value="value"
-          style="width: 120px"
-          :options="opts"
-          @change="handleChange"
-        ></a-select>
-        <span>-></span>
-        <a-select
-          v-model:value="value"
-          style="width: 120px"
-          :options="opts"
-          @change="handleChange"
-        ></a-select>
+  <div class=" h-[80vh] p-[20px] flex justify-center items-center">
+    <div class="  shadow-lg border border-gray-200 rounded-xl grid grid-cols-1 p-5 gap-5 ">
+      <div class=" flex items-center">
+        <a-input class=" flex-1 mr-5" addon-before="十六进制" v-model:value="value.hex" @change="handleChange(value.hex)"></a-input>
+        <c-button type="primary" size="mini">复制</c-button>
+      </div>
+      <div class=" flex items-center">
+        <a-input class=" flex-1 mr-5" addon-before="RGBA" v-model:value="value.rgba" @change="handleChange(value.hex)"></a-input>
+        <c-button type="primary" size="mini">复制</c-button>
+      </div>
+      <div class=" flex items-center">
+        <a-input class=" flex-1 mr-5" addon-before="HSLA" v-model:value="value.hsla" @change="handleChange(value.hex)"></a-input>
+        <c-button type="primary" size="mini">复制</c-button>
       </div>
     </div>
   </div>
@@ -30,24 +27,23 @@ export default {
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
 import { CColor } from '@/utils/color';
+import { copyText } from '@/utils/other';
 
-type Option = {
-  label: string,
-  value: any,
-}
 
-const opts = reactive<Option[]>([
-  { label: 'test', value: 1},
-  { label: 'test2', value: 2},
-  { label: 'test3', value: 3},
-  { label: 'test4', value: 4},
-])
+const value = reactive({
+  hex: '',
+  rgba: '',
+  hsla: ''
+})
 
-const value = ref<string>('33fr')
-
-const handleChange = (val) => {
-  console.log(val);
-  console.log(2,value.value);
+const handleChange = (val)=>{
+  const newColor = new CColor(val)
+  if(!newColor.isValid){
+    return Object.assign(value, {hex: '', rgba: '', hsla: ' '})
+  }
+  value.hex = newColor.hex
+  value.rgba = newColor.rgba
+  value.hsla = newColor.hsla
 }
 
 </script>
