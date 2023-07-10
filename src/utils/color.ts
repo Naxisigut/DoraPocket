@@ -87,7 +87,7 @@ export class CColor{
           break;
         case 'hex':
           if(color.length === 9){ // 长度为9,说明提供了透明度。无透明度时默认为1
-            opacity = Math.round(parseInt(color.slice(6), 16) * 100 /255) / 100
+            opacity = Math.round(parseInt(color.slice(7), 16) * 100 /255) / 100
           }
           break;
         case 'rgba':
