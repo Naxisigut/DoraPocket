@@ -39,7 +39,7 @@ export default {
     content: {
       type: String
     },
-    preBgc: {
+    affixBgc: {
       type: String,
       default: '#00000005'
     }
@@ -61,7 +61,7 @@ export default {
 }
 .affix{
   padding: 0.4em 0.8em;
-  background: v-bind(preBgc);
+  background: v-bind(affixBgc);
 }
 .prefix{
   border-right: 1px solid #d9d9d9;
