@@ -1,21 +1,22 @@
 <template>
   <div class="affix-span">
-    <div class="affix">
-      <slot name="prefix">
+    <slot name="prefix">
+      <div v-if="props.prefix" class="affix prefix">
         {{ props.prefix }}
-      </slot>
-    </div>
+      </div>
+    </slot>
     
-    <div class="span">
-      <slot>
-        
-      </slot>
-    </div>
-    <div class="affix">
-      <slot name="prefix">
+    <slot>
+      <div class="span">
+        {{ props.content }}
+      </div>
+    </slot>
+
+    <slot name="suffix">
+      <div v-if="props.suffix" class="affix suffix">
         {{ props.suffix }}
-      </slot>
-    </div>
+      </div>
+    </slot>
   </div>
 </template>
 
@@ -26,24 +27,46 @@
     },
     suffix: {
       type: String
+    },
+    content: {
+      type: String
+    },
+    preBgc: {
+      type: String,
+      default: '#00000005'
     }
   })
 </script>
 
 
 <style scoped>
+*{
+  box-sizing: border-box;
+}
 .affix-span{
+  font-size: 0.875rem;
   display: flex;
   align-items: center;
-  line-height: 2;
-  border: 1px solid rgb(217, 217, 217);
+  line-height: normal;
+  border: 1px solid #d9d9d9;
   border-radius: 5px;
 }
 .affix{
-  
+  padding: 0.4em 0.8em;
+  background: v-bind(preBgc);
+}
+.prefix{
+  border-right: 1px solid #d9d9d9;
+}
+.suffix{
+  border-left: 1px solid #d9d9d9;
 }
 .span{
+  padding: 0.4em 0.8em;
   flex: 1;
   width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 </style>
