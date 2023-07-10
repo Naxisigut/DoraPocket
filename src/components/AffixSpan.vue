@@ -1,3 +1,11 @@
+<!-- v1.0 -->
+
+<script lang="ts">
+export default {
+  name: 'AffixSpan'
+}
+</script>
+
 <template>
   <div class="affix-span">
     <slot name="prefix">
