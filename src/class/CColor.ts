@@ -1,4 +1,4 @@
-/* v1.01 */
+/* v1.02 */
 
 import { zeroPadPre } from '@/utils';
 const hexPattern = /^#(?:[0-9a-fA-F]{3}){1,2}(?:[0-9a-fA-F]{2})?$/
@@ -38,7 +38,7 @@ export class CColor{
   }
   public get rgba(){
     if(!this.rgbObj)return ''
-    return `rgba(${this.rgbObj.R}, ${this.rgbObj.G}, ${this.rgbObj.R}, ${this.opacity})`
+    return `rgba(${this.rgbObj.R}, ${this.rgbObj.G}, ${this.rgbObj.B}, ${this.opacity})`
   }
   public get hslObj(){
     if(!this.isValid || !this.rgbObj)return null
