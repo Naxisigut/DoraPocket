@@ -8,6 +8,10 @@ export default {
 <template>
   <div class=" h-[80vh] p-[20px] flex justify-center items-center">
     <div class=" w-[400px] shadow-lg border border-gray-200 rounded-xl grid grid-cols-1 p-5 gap-5 ">
+      <div>
+        <!-- <input type="color"> -->
+        <a-input addon-before="取色器" type="color" @change="pickColor"></a-input>
+      </div>
       <div class=" flex items-center">
         <a-input class=" flex-1 mr-5" addon-before="十六进制" placeHolder="请输入十六进制或RGBA" v-model:value="value.hex" @keyup.enter="confirm(value.hex)"></a-input>
         <c-button type="primary" size="mini" @click="copyText(value.hex)">复制</c-button>
@@ -28,6 +32,7 @@ export default {
 import { reactive } from 'vue';
 import { CColor } from '@/class/CColor';
 import { copyText } from '@/utils/other';
+import { ChangeEvent } from 'ant-design-vue/lib/_util/EventInterface';
 
 const value = reactive({
   hex: '',
@@ -44,6 +49,12 @@ const confirm = (val: string)=>{
   value.hex = newColor.hex
   value.rgba = newColor.rgba
   value.hsla = newColor.hsla
+}
+
+const pickColor = (e:ChangeEvent) => {
+  if(e.target.value){
+    confirm(e.target.value)
+  }
 }
 </script>
 
