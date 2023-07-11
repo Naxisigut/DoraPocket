@@ -26,7 +26,7 @@ export default {
 
 <script setup lang="ts">
 import { reactive } from 'vue';
-import { CColor } from '@/utils/color';
+import { CColor } from '@/class/CColor';
 import { copyText } from '@/utils/other';
 
 const value = reactive({

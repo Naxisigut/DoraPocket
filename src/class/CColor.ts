@@ -1,6 +1,6 @@
 /* v1.01 */
 
-import { zeroPadPre } from './index';
+import { zeroPadPre } from '@/utils';
 const hexPattern = /^#(?:[0-9a-fA-F]{3}){1,2}(?:[0-9a-fA-F]{2})?$/
 const rgbaPattern = /(rgb|rgba)\(([^)]+)\)/;
 

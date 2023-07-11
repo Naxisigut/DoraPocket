@@ -9,7 +9,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { CColor } from '@/utils/color';
+import { CColor } from '@/class/CColor';
 
 const props = defineProps({
   disabled: Boolean, // 禁用按钮
