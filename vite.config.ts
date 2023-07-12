@@ -15,6 +15,9 @@ export default defineConfig({
     }
   })],
 
+  /* githubPage部署 公共路径 */
+  base: '/DoraPocket/',
+
   /* 暴露主机地址，可以通过Network访问当前项目 */
   server: {
     host: '0.0.0.0'
