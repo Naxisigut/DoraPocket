@@ -14,6 +14,7 @@ export default defineConfig({
       }
     }
   })],
+  /* 自定义打包目录 */
   build:{
     outDir: 'docs'
   },
