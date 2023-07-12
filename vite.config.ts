@@ -14,6 +14,9 @@ export default defineConfig({
       }
     }
   })],
+  build:{
+    outDir: 'docs'
+  },
 
   /* githubPage部署 公共路径 */
   base: '/DoraPocket/',
