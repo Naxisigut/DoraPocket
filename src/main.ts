@@ -1,13 +1,13 @@
 import { createApp } from 'vue'
-import './style.css'
+import './style.css';
 import App from './App.vue'
 import './components-web';
 
 const app = createApp(App)
 
-import { createPinia } from 'pinia'
+import { createPinia } from 'pinia';
 import router from './router';
-const pinia = createPinia()
+const pinia = createPinia();
 import directives from './directives';
 import globalComponnents from './components';
 import antdComponents from './Imports/antdComponents';

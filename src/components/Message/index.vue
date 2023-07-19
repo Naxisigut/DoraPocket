@@ -17,7 +17,7 @@ export default {
 </template>
 
 <script setup lang="ts">
-import { nextTick, ref, onMounted, computed } from 'vue';
+import { nextTick, ref, onMounted, computed, PropType } from 'vue';
 
 const props = defineProps({
   content: {
@@ -33,11 +33,11 @@ const props = defineProps({
     required: true
   },
   type: {
-    type: String ,
+    type: String as PropType<'plain' | 'success' | 'error' | 'info' | 'warning'>,
     default: 'plain',
-    validator: (val: string) => {
-      return ['plain', 'success', 'error', 'info', 'warning'].includes(val)
-    }
+    // validator: (val: string) => {
+    //   return ['plain', 'success', 'error', 'info', 'warning'].includes(val)
+    // }
   }
 })
 
