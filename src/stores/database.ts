@@ -3,7 +3,7 @@ const allData: searchDataItem[] = [
   {name: '二维码', path: '/QR-dealer', routeName: 'QR-dealer'},
   {name: 'Github', path: '/github-shortcuts', routeName: 'github-shortcuts'},
   {name: '颜色转换', path: '/color-trans', routeName: 'color-trans'},
-  {name: '二维码', path: '/QR-dealer', routeName: 'QR-dealer'},
+  {name: '正则输入框', path: '/input-regex', routeName: 'input-regex'},
   {name: '二维码', path: '/QR-dealer', routeName: 'QR-dealer'},
   {name: '二维码', path: '/QR-dealer', routeName: 'QR-dealer'},
   {name: '二维码', path: '/QR-dealer', routeName: 'QR-dealer'},

@@ -21,6 +21,11 @@ const routes: RouteRecordRaw[] = [
     name: 'color-trans',
     component: ()=>import('@/views/color-trans/index.vue'),
   },
+  {
+    path: '/input-regex',
+    name: 'input-regex',
+    component: ()=>import('@/views/input-regex/index.vue'),
+  },
 ]
 
 // ()=>import('@/views/search-page/index.vue')
