@@ -33,6 +33,7 @@ import { reactive } from 'vue';
 import { CColor } from '@/class/CColor';
 import { copyText } from '@/utils/other';
 import { ChangeEvent } from 'ant-design-vue/lib/_util/EventInterface';
+import Msg from '@/components/Message';
 
 const value = reactive({
   hex: '',
@@ -43,6 +44,7 @@ const value = reactive({
 const confirm = (val: string)=>{
   const newColor = new CColor(val)
   if(!newColor.isValid){
+    Msg('输入值非法！')
     return Object.assign(value, { hex: '', rgba: '', hsla: '' })
   }
   
