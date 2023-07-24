@@ -50,7 +50,15 @@ const props = defineProps({
 const keyWord = ref('')
 const searchRes = computed(()=>{
   if(!keyWord.value)return []
-  return props.source.filter(i => i.name.includes(keyWord.value))
+  const val = keyWord.value
+  return props.source.filter((i) => {
+    if(i.name.includes(val))return true
+    if(i.routeName.includes(val))return true
+    if(i.keywords){
+      if(i.keywords.some((keyword) => keyword.includes(val)))return true
+    }
+    return false
+  })
 });
 
 

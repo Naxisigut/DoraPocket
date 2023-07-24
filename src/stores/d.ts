@@ -1,1 +1,6 @@
-type searchDataItem = Record<'name' | 'path' | 'routeName', string>
+type searchDataItem = {
+  name: string,
+  path: string,
+  routeName: string,
+  keywords?: string[]
+}

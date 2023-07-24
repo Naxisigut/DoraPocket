@@ -1,9 +1,9 @@
 // import {ref, computed, reactive} from 'vue';
 const allData: searchDataItem[] = [
-  {name: '二维码', path: '/QR-dealer', routeName: 'QR-dealer'},
-  {name: 'Github', path: '/github-shortcuts', routeName: 'github-shortcuts'},
-  {name: '颜色转换', path: '/color-trans', routeName: 'color-trans'},
-  {name: '正则输入框', path: '/input-regex', routeName: 'input-regex'},
+  {name: '二维码', path: '/QR-dealer', routeName: 'QR-dealer',keywords: ['QRCode', 'qrcode', '二维码']},
+  {name: 'Github', path: '/github-shortcuts', routeName: 'github-shortcuts', keywords: ['github', "GITHUB"]},
+  {name: '颜色转换', path: '/color-trans', routeName: 'color-trans', keywords:['颜色', 'color', 'Color']},
+  {name: '正则输入框', path: '/input-regex', routeName: 'input-regex', keywords:['正则输入框', 'regex', 'Regex']},
   {name: '二维码', path: '/QR-dealer', routeName: 'QR-dealer'},
   {name: '二维码', path: '/QR-dealer', routeName: 'QR-dealer'},
   {name: '二维码', path: '/QR-dealer', routeName: 'QR-dealer'},
@@ -22,7 +22,15 @@ export const useDataBaseStore = defineStore('database', {
   },
   actions:{
     search(val:string){
-      return this.allData.filter(i=>i.name.includes(val))
+      // return this.allData.filter(i=>i.name.includes(val))
+      return this.allData.filter((i) => {
+        if(i.name.includes(val))return true
+        if(i.routeName.includes(val))return true
+        if(i.keywords){
+          if(i.keywords.some((keyword) => keyword.includes(val)))return true
+        }
+        return false
+      })
     }
   }
 })
