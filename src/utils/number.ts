@@ -1,4 +1,4 @@
-/* v1.01 */
+/* v1.02 */
 
 /* 获取min~max之间的随机整数 */
 export function getRandomNumber(min:number, max:number) {
