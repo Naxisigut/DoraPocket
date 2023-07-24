@@ -22,9 +22,9 @@ const routes: RouteRecordRaw[] = [
     component: ()=>import('@/views/color-trans/index.vue'),
   },
   {
-    path: '/input-regex',
-    name: 'input-regex',
-    component: ()=>import('@/views/input-regex/index.vue'),
+    path: '/input-num-sanitize',
+    name: 'input-num-sanitize',
+    component: ()=>import('@/views/input-num-sanitize/index.vue'),
   },
 ]
 
