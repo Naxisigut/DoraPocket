@@ -1,4 +1,4 @@
-type searchDataItem = {
+declare type searchDataItem = {
   name: string,
   path: string,
   routeName: string,
