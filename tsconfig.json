@@ -1,0 +1,9 @@
+{
+  // 路径别名配置
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+  },
+}

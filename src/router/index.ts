@@ -26,6 +26,11 @@ const routes: RouteRecordRaw[] = [
     name: 'input-num-sanitize',
     component: ()=>import('@/views/input-num-sanitize/index.vue'),
   },
+  {
+    path: '/gpt-chatter',
+    name: 'gpt-chatter',
+    component: ()=>import('@/views/gpt-chatter/index.vue'),
+  },
 ]
 
 // ()=>import('@/views/search-page/index.vue')
