@@ -5,3 +5,5 @@ A package contains a series of apps, such as QRCode read/generate, color transfo
 1. QRCode Dealer
 2. my Github shortcuts
 3. color transformer
+4. input-number-regex
+5. gpt-chatter
