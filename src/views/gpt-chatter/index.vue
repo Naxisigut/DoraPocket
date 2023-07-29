@@ -43,70 +43,31 @@ import {ref, reactive, computed } from 'vue';
 import { Configuration, OpenAIApi } from 'openai';
 import Msg from '@/components/Message';
 import ChatRecord from './components/chat-record.vue';
+import { useMessages } from './useMessages';
+import { useChatter } from './useChatter';
 
+const { configForm, chatter, initChatter, getAnswer } = useChatter()
+const { messages, clear, msgGo, msgBack } = useMessages()
 
-const configForm = ref({
-  basePath: 'https://api.chatanywhere.com.cn',
-  apiKey: ''
-})
-let openAIApi = ref<OpenAIApi>(null)
 const openSetting = () => {
   settingVisible.value = true
 }
 const settingVisible = ref<boolean>(false)
 const handleOk = () => {
-  openAIApi.value = new OpenAIApi(new Configuration(configForm.value))
-  Msg.success('初始化完成')
+  initChatter()
   settingVisible.value = false
 }
 
 const userInput = ref<string>('hello')
-const allowInput = computed(()=>!!openAIApi.value)
+const allowInput = computed(()=>!!chatter.value)
 
-const messages = reactive<Message[]>([
-  // { role: 'assistant', content: '1'},
-  // { role: 'assistant', content: '2'},
-  // { role: 'user', content: '你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好'},
-  // { role: 'user', content: '你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好'},
-  // { role: 'user', content: '你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好'},
-  // { role: 'user', content: '你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好'},
-  // { role: 'user', content: '你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好'},
-  // { role: 'user', content: '你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好'},
-  // { role: 'user', content: '你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好'},
-  // { role: 'user', content: '你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好'},
-  // { role: 'user', content: '你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好'},
-  // { role: 'user', content: '2'},
-])
-const clear = ()=>{
-  messages.length = 0
-}
 const send = ()=>{
   if(!allowInput.value)return Msg.error('请设置api！')
   msgGo(userInput.value)
-  getAnswer().then((res)=>{
+  getAnswer(messages).then((res)=>{
     msgBack(res.content)
-    console.log(res.content);
+    // console.log(res.content);
   })
-}
-const msgGo = (val)=>{
-  messages.push({
-    role: 'user',
-    content: val
-  })
-}
-const msgBack = (val: string)=>{
-  messages.push({
-    role: 'assistant',
-    content: val
-  })
-
-}
-const getAnswer = async ()=>{
-   const answer = await openAIApi.value.createChatCompletion({
-    model: 'gpt-3.5-turbo',
-    messages
-   })
-   return answer.data.choices[0].message
 }
 
 </script>
