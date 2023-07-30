@@ -14,12 +14,6 @@ export default {
       typography:{
         DEFAULT:{
           css: {
-            // pre标签中的code标签背景为透明
-            // pre: {
-            //   code:{
-            //     background: 'transparent'
-            //   }
-            // },
             // 其它code标签样式
             ':not(pre)>code': {
               background: 'rgb(229 229 229);',
