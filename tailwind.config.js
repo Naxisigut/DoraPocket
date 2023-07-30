@@ -9,10 +9,33 @@ export default {
       backdropBlur: {
         xxs: '1px',
         xs: '2px',
+      },
+      /* 自定义tailwind排版的样式 */ 
+      typography:{
+        DEFAULT:{
+          css: {
+            // pre标签中的code标签背景为透明
+            // pre: {
+            //   code:{
+            //     background: 'transparent'
+            //   }
+            // },
+            // 其它code标签样式
+            ':not(pre)>code': {
+              background: 'rgb(229 229 229);',
+              borderRadius: '5px',
+              padding: '2px 4px',
+              margin: '2px',
+            }
+          }
+        }
       }
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+    // ...
+  ],
 }
 
 /* responsive
