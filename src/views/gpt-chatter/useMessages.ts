@@ -2,8 +2,8 @@ import { ref, reactive } from 'vue';
 
 export const useMessages = ()=>{
   const messages = reactive<Message[]>([
-    // { role: 'assistant', content: '1'},
-    // { role: 'assistant', content: '2'},
+    // { role: 'assistant', content: '你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好'},
+    // { role: 'assistant', content: '你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好'},
     // { role: 'user', content: '你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好'},
     // { role: 'user', content: '你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好'},
     // { role: 'user', content: '你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好'},
