@@ -11,15 +11,16 @@ export default {
         xs: '2px',
       },
       /* 自定义tailwind排版的样式 */ 
-      typography:{
-        DEFAULT:{
-          css: {
-            // 其它code标签样式
-            ':not(pre)>code': {
-              background: 'rgb(229 229 229);',
-              borderRadius: '5px',
-              padding: '2px 4px',
-              margin: '2px',
+      typography(theme){
+        return {
+          DEFAULT:{
+            css: {
+              // inline-code标签样式
+              ':not(pre)>code': {
+                background: theme('colors.stone.200'),
+                borderRadius: theme('borderRadius.DEFAULT'),
+                padding: `${theme('spacing.1')} ${theme('spacing[1.5]')} `
+              }
             }
           }
         }

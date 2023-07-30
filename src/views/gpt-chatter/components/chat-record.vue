@@ -9,7 +9,7 @@
         :markdown="props.record.content" 
         :options="{ emoji: true }"
         flavor="github" 
-        class="prose prose-sm prose-p:my-2 prose-code:before:content-[none] prose-code:after:content-[none] prose-pre:my-2" 
+        class="prose prose-sm prose-p:my-2 prose-pre:my-2 prose-code:before:hidden prose-code:after:hidden" 
       ></VueShowdown>
     </div>
     <i v-if="isUser" style="font-size: xx-large;" class="iconfont icon-user ml-2 text-blue-200"></i>
