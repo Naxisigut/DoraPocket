@@ -1,5 +1,5 @@
 <script lang="ts">
-export default{
+export default {
   name: 'GptChatter',
 };
 </script>
@@ -37,7 +37,7 @@ export default{
   </div>
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 import {ref, computed } from 'vue';
 import Msg from '@/components/Message';
 import ChatRecord from './components/chat-record.vue';
@@ -63,11 +63,13 @@ const send = ()=>{
   if(!allowInput.value)return Msg.error('请设置api！')
   msgGo(userInput.value)
   userInput.value = ''
+  const msg = msgBack('加载中...')
   getAnswer(messages).then((res)=>{
-    msgBack(res.content)
+    msg.content = res.content
     // console.log(res.content);
   })
 }
 
 </script>
 
+<style scoped></style>

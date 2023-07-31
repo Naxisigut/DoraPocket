@@ -1,8 +1,8 @@
 <template>
   <div class="chat-record flex" :class="{ 'justify-end': props.record.role === 'user' }">
     <i v-if="!isUser" style="font-size: xx-large;" class="iconfont icon-bot-solid mr-2 text-blue-200"></i>
-    <div :class="{'bg-lime-500': isUser}" class=" max-w-[80%] self-center inline-block whitespace-normal py-1 px-2 border border-gray-200 rounded-md">
-      <span v-if="isUser" style="color: #232323ff" class=" font-sm">{{ props.record.content }}</span>
+    <div :class="[isUser ? 'bg-lime-500' : 'bg-white']" class=" max-w-[80%] self-center inline-block whitespace-normal py-1 px-2 border border-gray-200 rounded-md">
+      <span v-if="isUser" style="color: #232323ff" class=" text-sm">{{ props.record.content }}</span>
       <!-- tailwind去除code默认的伪元素 -->
       <VueShowdown 
         v-else
@@ -15,7 +15,6 @@
     <i v-if="isUser" style="font-size: xx-large;" class="iconfont icon-user ml-2 text-blue-200"></i>
   </div>
 </template>
-
 
 <script lang="ts" setup>
 import { PropType, computed } from 'vue';

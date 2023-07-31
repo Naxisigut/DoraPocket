@@ -18,10 +18,12 @@ export const useMessages = ()=>{
     })
   }
   const msgBack = (val: string)=>{
-    messages.push({
+    const msg:Message = {
       role: 'assistant',
       content: val
-    })
+    }
+    messages.push(msg)
+    return msg
   }
 
   return { messages, clear, msgGo, msgBack }
