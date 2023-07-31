@@ -23,7 +23,7 @@ export const useMessages = ()=>{
       content: val
     }
     messages.push(msg)
-    return msg
+    return messages[messages.length -1]
   }
 
   return { messages, clear, msgGo, msgBack }

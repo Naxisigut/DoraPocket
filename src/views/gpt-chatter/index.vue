@@ -6,7 +6,6 @@ export default {
 
 <template>
   <div class=" h-[90vh] p-[20px] flex flex-col items-center">
-
     <div class=" flex flex-col w-full md:w-[80%] h-[100%] bg-neutral-100 shadow-lg border border-gray-200 rounded-xl">
       <h4 class=" px-5 py-2 border-b-2 text-lg">
         <span>Chat With Me</span>
@@ -15,7 +14,7 @@ export default {
         <ChatRecord v-for="(item, index) in messages" :key="index" :record="item"></ChatRecord>
       </div>
       <div class=" border-t-2 p-2">
-        <a-textarea autosize v-model:value="userInput" :disabled="!allowInput" @keyup.ctrl.enter="send"></a-textarea>
+        <a-textarea autoSize v-model:value="userInput" :disabled="!allowInput" @keyup.ctrl.enter="send"></a-textarea>
         <div class="btn-wrapper text-right mt-2">
           <i class="iconfont icon-clear mr-3 hover:font-bold " @click="clear"></i>
           <i class="iconfont icon-setting mr-3 hover:font-bold" @click="openSetting"></i>
@@ -38,7 +37,7 @@ export default {
 </template>
 
 <script setup lang="ts">
-import {ref, computed } from 'vue';
+import {ref, computed, reactive } from 'vue';
 import Msg from '@/components/Message';
 import ChatRecord from './components/chat-record.vue';
 import { useMessages } from './useMessages';
@@ -66,7 +65,6 @@ const send = ()=>{
   const msg = msgBack('加载中...')
   getAnswer(messages).then((res)=>{
     msg.content = res.content
-    // console.log(res.content);
   })
 }
 
