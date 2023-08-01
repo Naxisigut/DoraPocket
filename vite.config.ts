@@ -4,16 +4,16 @@ import path from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue({
-    template:{
-      compilerOptions:{
-        /* vaadin web-components */
-        isCustomElement: (tag) => {
-          return tag.startsWith('vaadin')
+  plugins: [
+    vue({
+      template:{
+        compilerOptions:{
+          /* vaadin web-components */
+          isCustomElement: (tag) =>  tag.startsWith('vaadin')
         }
       }
-    }
-  })],
+    })
+  ],
   /* 自定义打包目录 */
   build:{
     outDir: 'docs'

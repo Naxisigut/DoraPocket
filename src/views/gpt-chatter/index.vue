@@ -62,7 +62,7 @@ const send = ()=>{
   if(!allowInput.value)return Msg.error('请设置api！')
   msgGo(userInput.value)
   userInput.value = ''
-  const msg = msgBack('加载中...')
+  const msg = msgBack('')
   getAnswer(messages).then((res)=>{
     msg.content = res.content
   })
@@ -71,3 +71,4 @@ const send = ()=>{
 </script>
 
 <style scoped></style>
+@/svgs/svg-loading.vie
