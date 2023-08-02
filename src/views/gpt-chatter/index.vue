@@ -64,7 +64,7 @@ const send = ()=>{
   userInput.value = ''
   const msg = msgBack('')
   getAnswer(messages).then((res)=>{
-    msg.content = res.content
+    msg.content = res.choices[0].message.content
   })
 }
 

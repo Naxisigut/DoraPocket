@@ -1,13 +1,14 @@
 import {ref} from 'vue';
-import { Configuration, OpenAIApi } from 'openai';
+import { Configuration, OpenAIApi} from 'openai';
 import Msg from '@/components/Message';
+import { chatCompletion } from '@/apis/openai';
 
+const configForm = ref<ConfigForm>({
+  basePath: 'https://api.chatanywhere.com.cn',
+  apiKey: ''
+})
 
 export const useChatter = ()=>{
-  const configForm = ref<ConfigForm>({
-    basePath: 'https://api.chatanywhere.com.cn',
-    apiKey: ''
-  })
 
   let chatter = ref<OpenAIApi>(null)
 
@@ -19,19 +20,19 @@ export const useChatter = ()=>{
   }
 
   // 发送提问请求
-  const getAnswer = async (messages: Message[])=>{
-    const answer = await chatter.value.createChatCompletion({
-     model: 'gpt-3.5-turbo',
-     messages
-    })
-    return answer.data.choices[0].message
+  const getAnswer = (messages: Message[])=>{
+    return chatCompletion(messages)
  }
 
  return {
   chatter,
   configForm,
   initChatter,
-  getAnswer
+  getAnswer,
+  getConfig,
  }
 
 }
+
+// 获取当前openAi配置
+export const getConfig = ()=> configForm.value

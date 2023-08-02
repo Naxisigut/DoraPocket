@@ -1,14 +1,14 @@
 /* v1.1 */
 import { createMsgApp } from "./instance";
-type MsgType = 'success' | 'error' | 'info' | 'warning'
-type MsgFuncType = {
+declare type MsgType = 'success' | 'error' | 'info' | 'warning'
+declare type MsgFuncType = {
   (config: MsgConfig | string): void
   success: (config: MsgConfig | string) => void
   error: (config: MsgConfig | string) => void
   info: (config: MsgConfig | string) => void
   warning: (config: MsgConfig | string) => void
 } 
-type MsgConfig = {
+declare type MsgConfig = {
   content: string,
   duration?: number,
   type?: 'plain' | MsgType
