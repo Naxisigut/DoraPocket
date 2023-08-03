@@ -1,5 +1,5 @@
 <template>
-  <div class="chat-record flex" :class="{ 'justify-end': props.record.role === 'user' }">
+  <div class="chat-record flex mt-3" :class="{ 'justify-end': props.record.role === 'user' }">
     <i v-if="!isUser" style="font-size: xx-large;" class="iconfont icon-bot-solid mr-2 text-blue-200"></i>
     <div :class="[isUser ? 'bg-lime-500' : 'bg-white']" class=" max-w-[80%] self-center inline-block whitespace-normal py-1 px-2 border border-gray-200 rounded-md">
       <svgLoading v-if="!loaded"></svgLoading>
@@ -47,7 +47,6 @@ const loaded = computed(() => !!props.record.content)
 .bg-assistant{
   background: rgb(255 255 255);
 }
-.chat-record + .chat-record{
-  margin-top: 10px;
+.chat-record{
 }
 </style>
