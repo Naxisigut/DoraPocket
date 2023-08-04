@@ -51,27 +51,11 @@ export default {
 <script setup lang="ts">
 import { reactive, Ref, ref } from 'vue';
 import PanelFold from '@/components/PanelFold.vue';
-
-
-/* 简单封装fetch */
-function fetchGithub(url: string){
-  return new Promise<any>((resolve, reject) => {
-    fetch(url).then((response) => {
-      // console.log(response);
-      // if(response.status !== 200){
-      //.json()返回一个Promise，其结果为json parse后的对象
-      response.ok ? resolve(response.json()) : reject(new Error(response.status.toString()))
-    })
-    .catch((err) => {
-      reject(err)
-    })
-    
-  })
-}
+import { easyFetch } from '@/utils/fetch';
 
 /* 获取用户数据&仓库数据 */
 let profile: Ref<GitHubProfile | null> = ref(null)
-fetchGithub('https://api.github.com/users/Naxisigut').then((res: GitHubProfile) => {
+easyFetch.get('https://api.github.com/users/Naxisigut').then((res: GitHubProfile) => {
   profile.value = res
 }).then(() => {
   getRepos()
@@ -89,7 +73,7 @@ const reposPanel = reactive({
 let repos: Ref<Array<Repository>> = ref([])
 const getRepos = () => {
   if(!profile.value)return
-  fetchGithub(profile.value.repos_url).then((res) => {
+  easyFetch.get(profile.value.repos_url).then((res) => {
     repos.value = res
   })
 }
@@ -103,7 +87,7 @@ const starredPanel = reactive({
 let starred = ref<Array<Record<string, any>>>([])
 const getStarred = () => {
   if(!profile.value)return
-  fetchGithub(profile.value.starred_url.split('{')[0]).then((res) => {
+  easyFetch.get(profile.value.starred_url.split('{')[0]).then((res) => {
     starred.value = res
   })
 }
