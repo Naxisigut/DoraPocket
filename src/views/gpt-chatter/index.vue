@@ -10,8 +10,9 @@ export default {
       <h4 class=" px-5 py-2 border-b-2 text-lg">
         <span>Chat With Me</span>
       </h4>
-      <div class="p-5 overflow-auto h-0 flex-1">
+      <div class="px-5 overflow-y-scroll scroll-auto h-0 flex-1">
         <ChatRecord v-for="(item, index) in messages" :key="index" :record="item"></ChatRecord>
+        <div class=" h-0 mt-3" ref="ballast"></div>
       </div>
       <div class=" border-t-2 p-2">
         <a-textarea autoSize v-model:value="userInput" :disabled="!allowInput" @keyup.ctrl.enter="send"></a-textarea>
@@ -37,7 +38,7 @@ export default {
 </template>
 
 <script setup lang="ts">
-import {ref, computed, reactive } from 'vue';
+import {ref, computed, nextTick } from 'vue';
 import Msg from '@/components/Message';
 import ChatRecord from './components/chat-record.vue';
 import { useMessages } from './useMessages';
@@ -63,8 +64,18 @@ const send = ()=>{
   msgGo(userInput.value)
   userInput.value = ''
   const msg = msgBack('')
+  nextTick(toRecordBottom)
   getAnswer(messages).then((res)=>{
     msg.content = res.choices[0].message.content
+    nextTick(toRecordBottom)
+  })
+}
+
+const ballast = ref<HTMLDivElement>(null)
+const toRecordBottom = ()=>{
+  ballast.value.scrollIntoView({
+    behavior: 'smooth',
+    block: 'end'
   })
 }
 
