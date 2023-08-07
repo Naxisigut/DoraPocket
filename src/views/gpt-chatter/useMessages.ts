@@ -1,4 +1,4 @@
-import { ref, reactive } from 'vue';
+import { ref, reactive, watch } from 'vue';
 
 export const useMessages = ()=>{
   const messages = reactive<Message[]>([
@@ -15,16 +15,36 @@ export const useMessages = ()=>{
     // { role: 'assistant', content: '开启下面的 `emoji` 选项，启用 emoji 解析！ :smile:'},
   ])
 
-  const clear = ()=>{
-    messages.length = 0
+  /* 用户输入的记录，用于上下键切换输入值 */
+  const userMessages = reactive<Message[]>([])
+  const currUserIptIdx = ref<number>(0)
+  const userIptShift = (direction: 'pre' | 'next') => {
+    currUserIptIdx.value = direction === 'pre' 
+      ? Math.max(0, currUserIptIdx.value - 1) 
+      : Math.min(userMessages.length - 1, currUserIptIdx.value + 1)
+    return currUserIptIdx.value ? userMessages[currUserIptIdx.value]?.content : 'hello'
   }
 
-  const msgGo = (val)=>{
-    messages.push({
+  watch(userMessages, (newVal)=>{
+    currUserIptIdx.value = newVal.length
+  })
+
+  const clear = ()=>{
+    messages.length = 0
+    userMessages.length = 0
+  }
+
+  // user input
+  const msgGo = (val:string)=>{
+    const msg:Message = {
       role: 'user',
       content: val
-    })
+    }
+    messages.push(msg)
+    userMessages.push(msg)
   }
+
+  // bot answer
   const msgBack = (val: string)=>{
     const msg:Message = {
       role: 'assistant',
@@ -34,7 +54,9 @@ export const useMessages = ()=>{
     return messages[messages.length -1]
   }
 
-  return { messages, clear, msgGo, msgBack }
+  
+
+  return { messages, userIptShift, clear, msgGo, msgBack }
 }
 
 

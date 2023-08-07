@@ -10,12 +10,12 @@ export default {
       <h4 class=" px-5 py-2 border-b-2 text-lg">
         <span>Chat With Me</span>
       </h4>
-      <div class="px-5 overflow-y-scroll scroll-auto h-0 flex-1">
+      <div class="px-5 overflow-auto scroll-auto h-0 flex-1">
         <ChatRecord v-for="(item, index) in messages" :key="index" :record="item"></ChatRecord>
         <div class=" h-0 mt-3" ref="ballast"></div>
       </div>
       <div class=" border-t-2 p-2">
-        <a-textarea autoSize v-model:value="userInput" :disabled="!allowInput" @keyup.ctrl.enter="send"></a-textarea>
+        <a-textarea autoSize v-model:value="userInput" :disabled="!allowInput" @keyup="handleInputKey" @keydown.up.prevent></a-textarea>
         <div class="btn-wrapper text-right mt-2">
           <i class="iconfont icon-clear mr-3 hover:font-bold " @click="clear"></i>
           <i class="iconfont icon-setting mr-3 hover:font-bold" @click="openSetting"></i>
@@ -45,8 +45,9 @@ import { useMessages } from './useMessages';
 import { useChatter } from './useChatter';
 
 const { configForm, chatter, initChatter, getAnswer } = useChatter()
-const { messages, clear, msgGo, msgBack } = useMessages()
+const { messages, userIptShift, clear, msgGo, msgBack } = useMessages()
 
+/* 设置界面 */
 const settingVisible = ref<boolean>(false)
 const openSetting = () => {
   settingVisible.value = true
@@ -56,9 +57,9 @@ const handleOk = () => {
   settingVisible.value = false
 }
 
+/* 输入并发送 */
 const userInput = ref<string>('hello')
 const allowInput = computed(()=>!!chatter.value)
-
 const send = ()=>{
   if(!allowInput.value)return Msg.error('请设置api！')
   msgGo(userInput.value)
@@ -70,7 +71,26 @@ const send = ()=>{
     nextTick(toRecordBottom)
   })
 }
+const handleInputKey = (e:KeyboardEvent) => {
+  // console.log(e);
+  switch (e.code) {
+    case 'Enter':
+      if(e.ctrlKey)send()
+      break;
+    case 'ArrowUp':
+      const preIpt = userIptShift('pre')
+      if(preIpt)userInput.value = preIpt
+      break;
+      case 'ArrowDown':
+      const nextIpt = userIptShift('next')
+      if(nextIpt)userInput.value = nextIpt
+      break;
+    default:
+      break;
+  }
+}
 
+/* 滚动至底部 */
 const ballast = ref<HTMLDivElement>(null)
 const toRecordBottom = ()=>{
   ballast.value.scrollIntoView({
@@ -82,4 +102,3 @@ const toRecordBottom = ()=>{
 </script>
 
 <style scoped></style>
-@/svgs/svg-loading.vie
